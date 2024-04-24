@@ -18,6 +18,38 @@ namespace Blinkit_driver {
         )
     }
 
+    /**
+        * normal2 driver blocks
+        
+        * @param normal2 which normal2 to turn on
+        * @param dir which direction to go
+        * @param speed how fast
+        */
+    //% blockId=normal2
+    //% block="指定%OutmodeName|Direct Drive %Sc"
+    //% Sc.min=0 Sc.max=180
+    export function normal2(OutmodeName: OutmodeName, Sc: number): void {
+        const asciiCode = OutmodeName + 32; // ASCII码对应
+        const char = asciiToChar(asciiCode);
+        let projectInfo = "7e30" + char + "#"
+        serial.writeString(projectInfo);
+    }
+
+    /**
+        * normal driver blocks
+        
+        * @param normal which normal to turn on
+        * @param dir which direction to go
+        * @param speed how fast
+        */
+    //% blockId=normal
+    //% block="指定%OutmodeName|触发 %Outmode"
+    export function normal(OutmodeName: OutmodeName, Outmode: Outmode): void {
+        const asciiCode = OutmodeName + 32; // ASCII码对应
+        const char = asciiToChar(asciiCode);
+        let projectInfo = "7e30" + char + "#"
+        serial.writeString(projectInfo);
+    }
 
     /**
         * Sensor driver blocks
@@ -226,21 +258,7 @@ namespace Blinkit_driver {
         PosNum9,
     }
 
-    /**
-        * normal driver blocks
-        
-        * @param normal which normal to turn on
-        * @param dir which direction to go
-        * @param speed how fast
-        */
-    //% blockId=normal
-    //% block="指定%OutmodeName|触发 %Outmode"
-    export function normal(OutmodeName: OutmodeName, Outmode: Outmode): void {
-        const asciiCode = OutmodeName + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        let projectInfo = "7e30" + char + "#"
-        serial.writeString(projectInfo);
-    }
+
 
     /**
         * Led8x8 driver blocks
