@@ -104,6 +104,40 @@ namespace Blinkit_driver {
         Sensor11,
     }
 
+    export enum OutmodeName {
+        //% block="All"
+        Outmode0,
+        //% block="舵机"
+        Outmode1,
+        //% block="直流电机"
+        Outmode2,
+        //% block="Led8x8"
+        Outmode3,
+        //% block="LED_RGB"
+        Outmode4,
+        //% block="Mp3"
+        Outmode5,
+    }
+    export enum Outmode {
+        //% block="1"
+        Outmode0,
+        //% block="2"
+        Outmode1,
+        //% block="3"
+        Outmode2,
+        //% block="4"
+        Outmode3,
+        //% block="5"
+        Outmode4,
+        //% block="6"
+        Outmode5,
+        //% block="7"
+        Outmode6,
+        //% block="8"
+        Outmode7,
+
+    }
+
     export enum Led8x8_DH2 {
         //% block="向右"
         Right,
@@ -192,6 +226,21 @@ namespace Blinkit_driver {
         PosNum9,
     }
 
+    /**
+        * normal driver blocks
+        
+        * @param normal which normal to turn on
+        * @param dir which direction to go
+        * @param speed how fast
+        */
+    //% blockId=normal
+    //% block="指定%OutmodeName|触发 %Outmode"
+    export function normal(OutmodeName: OutmodeName, Outmode: Outmode): void {
+        const asciiCode = OutmodeName + 32; // ASCII码对应
+        const char = asciiToChar(asciiCode);
+        let projectInfo = "7e30" + char + "#"
+        serial.writeString(projectInfo);
+    }
 
     /**
         * Led8x8 driver blocks
