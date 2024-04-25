@@ -196,10 +196,10 @@ namespace Blinkit_driver {
     }
 
     export enum Led8x8_DH2 {
-        //% block="向右"
-        Right,
         //% block="向左"
         Left,
+        //% block="向右"
+        Right,
         //% block="变化"
         Change,
     }
@@ -297,7 +297,6 @@ namespace Blinkit_driver {
     export function Led8x8(PosNum: PosNum, Dh: Led8x8_DH): void {
         const asciiCode = PosNum + 32; // ASCII码对应
         const char = asciiToChar(asciiCode);
-
         let projectInfo = "7e5d" + char + "  #"
         serial.writeString(projectInfo);
     }
@@ -319,10 +318,12 @@ namespace Blinkit_driver {
     export function Led8x8_1(PosNum: PosNum, s: string, Dh: Led8x8_DH2, speed: number): void {
         const asciiCode = PosNum + 32; // ASCII码对应
         const char = asciiToChar(asciiCode);
-
-        let projectInfo = "7e30" + char + "#"
+        let Wv = 32 + Dh*10 + speed ;
+        let length: number = s.length + 53; //48+5
+        const char2 = asciiToChar(length);
+        const char3 = asciiToChar(Wv);
+        let projectInfo = "7e" + char2 + "d" + char + "!" + char3 + s + "#" ;
         serial.writeString(projectInfo);
-
     }
 
     /**
