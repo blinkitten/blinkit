@@ -304,7 +304,7 @@ namespace Blinkit_driver {
 
 
     /**
-    * Led8x8 driver blocks
+    * Led8x8 driver blocks    ok
     
     * @param Led8x8 which Led8x8 to turn on
     * @param dir which direction to go
@@ -341,13 +341,23 @@ namespace Blinkit_driver {
     //% Green.min=0 Green.max=255
     //% Blue.min=0 Blue.max=255
     export function LedRGB(PosNum: PosNum, Red: number, Green: number, Blue: number, Dh: LedRGB_DH): void {
-
-
-
         const asciiCode = PosNum + 32; // ASCII码对应
+        const asciiCode2 = Dh + 32 + 1;    // ASCII码对应
+        const Red1 = Red % 10 + 32;
+        Red = Red / 10 + 32;
+        const Green1 = Green % 10 + 32;
+        Green = Green / 10 + 32;
+        const Blue1 = Blue % 10 + 32;
+        Blue = Blue / 10 + 32;
         const char = asciiToChar(asciiCode);
-
-        let projectInfo = "7e30" + char + "#"
+        const char2 = asciiToChar(asciiCode2);
+        const char3 = asciiToChar(Red);
+        const char4 = asciiToChar(Red1);
+        const char5 = asciiToChar(Green);
+        const char6 = asciiToChar(Green1);
+        const char7 = asciiToChar(Blue);
+        const char8 = asciiToChar(Blue1);
+        let projectInfo = "7e:e" + char + char2 + char3 + char4 + char5 + char6 + char7 + char8 +"#" ;
         serial.writeString(projectInfo);
 
     }
