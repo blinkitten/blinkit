@@ -166,12 +166,14 @@ namespace Blinkit_driver {
         Outmode1,
         //% block="直流电机"
         Outmode2,
-        //% block="Led8x8"
+        //% block="双路直流电机"
         Outmode3,
-        //% block="LED_RGB"
+        //% block="Led8x8"
         Outmode4,
-        //% block="Mp3"
+        //% block="LED_RGB"
         Outmode5,
+        //% block="Mp3"
+        Outmode6,
     }
     export enum Outmode {
         //% block="1"
