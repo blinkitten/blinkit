@@ -58,9 +58,10 @@ namespace Blinkit_driver {
     //% block="指定%OutmodeName|触发 %Outmode"
     export function normal(OutmodeName: OutmodeName, Outmode: Outmode): void {
         if (OutmodeName == 0) {
-            const OutValue = Outmode + 32; // ASCII码对应
+            const OutValue = Outmode + 33; // ASCII码对应
             const char = asciiToChar(OutValue);
             let projectInfo = "7e30" + char + "#";
+            //let projectInfo = "7e30!#" ;
             serial.writeString(projectInfo);
         }
         else {
