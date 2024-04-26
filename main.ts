@@ -293,7 +293,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_off
-    //% block="8x8,位置%PosNum|,清空屏幕, 动画%Dh"
+    //% block="8x8%PosNum|,清空屏幕, 动画%Dh"
     export function Led8x8(PosNum: PosNum, Dh: Led8x8_DH): void {
         const asciiCode = PosNum + 32; // ASCII码对应
         const char = asciiToChar(asciiCode);
@@ -313,7 +313,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_String
-    //% block="8x8,位置%PosNum|显示字符串%s|动画%Dh|速度 %speed"
+    //% block="8x8%PosNum|显示字符串%s|动画%Dh|速度 %speed"
     //% speed.min=1 speed.max=6
     export function Led8x8_1(PosNum: PosNum, s: string, Dh: Led8x8_DH2, speed: number): void {
         const asciiCode = PosNum + 32; // ASCII码对应
@@ -335,7 +335,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="LED_RGB"
     //% blockId=Led_RGB
-    //% block="LedRGB,位置%PosNum|颜色R %Red|G %Green|B %Blue|动画%Dh"
+    //% block="LedRGB%PosNum|颜色R %Red|G %Green|B %Blue|动画%Dh"
     //% speed.min=1 speed.max=6
     //% Red.min=0 Red.max=255
     //% Green.min=0 Green.max=255
@@ -370,7 +370,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Mp3"
     //% blockId=Mp3
-    //% block="Mp3,位置%PosNum|%Dh"
+    //% block="Mp3%PosNum|%Dh"
     export function Mp3(PosNum: PosNum, Dh: Mp3_DH): void {
         const asciiCode = PosNum + 32; // ASCII码对应
         const asciiCode2 = Dh + 32; // ASCII码对应
@@ -388,7 +388,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Mp3"
     //% blockId=Mp3_2
-    //% block="Mp3,位置%PosNum|设置音量%Vol"
+    //% block="Mp3%PosNum|设置音量%Vol"
     //% Vol.min=0 Vol.max=28
     export function Mp3_2(PosNum: PosNum, Vol: number): void {
         const asciiCode = PosNum + 32; // ASCII码对应
@@ -407,7 +407,7 @@ namespace Blinkit_driver {
 */
     //% subcategory="Mp3"
     //% blockId=Mp3_3
-    //% block="Mp3,位置%PosNum|播放第 %Xq|首"
+    //% block="Mp3%PosNum|播放第 %Xq|首"
     //% Xq.min=1 Xq.max=10
     export function Mp3_3(PosNum: PosNum, Xq: number): void {
         const asciiCode = PosNum + 32; // ASCII码对应
@@ -427,7 +427,7 @@ namespace Blinkit_driver {
         */
     //% subcategory="Servo"
     //% blockId=Servo
-    //% block="180舵机,位置%PosNum|转到%Sc|速度 %speed"
+    //% block="180舵机%PosNum|转到%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
     //% speed.min=1 speed.max=10
     export function Servo_360(PosNum: PosNum, Sc: number, speed: number): void {
@@ -451,7 +451,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Servo"
     //% blockId=Servo_2
-    //% block="360舵机,位置%PosNum|pwm%Sc|速度 %speed"
+    //% block="360舵机%PosNum|pwm%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
     //% speed.min=1 speed.max=10
     export function Servo_180(PosNum: PosNum, Sc: number, speed: number): void {
@@ -476,7 +476,7 @@ namespace Blinkit_driver {
         */
     //% subcategory="Motor"
     //% blockId=Motorx1
-    //% block="直流电机,位置%PosNum|转动方向%dir|速度 %speed"
+    //% block="直流电机%PosNum|转动方向%dir|速度 %speed"
     //% speed.min=0 speed.max=255
     export function Motorx1(PosNum: PosNum, dir: Motor_DH, speed: number): void {
         const asciiCode = PosNum + 32; // ASCII码对应
