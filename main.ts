@@ -19,7 +19,7 @@ namespace Blinkit_driver {
     }
 
     /**
-    * normal2 driver blocks   ok
+    * normal2 driver blocks  ok
     * @param normal2 which normal2 to turn on
     * @param dir which direction to go
     * @param speed how fast
