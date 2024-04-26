@@ -61,10 +61,11 @@ class Blinkit_driver:
     # % block="指定%OutmodeName|触发 %Outmode"
     def normal(OutmodeName2: OutmodeName, Outmode: Outmode):
         if OutmodeName2 == 0:
-            OutValue4 = Outmode + 32
+            OutValue4 = Outmode + 33
             # ASCII码对应
             char4 = asciiToChar(OutValue4)
             projectInfo3 = "7e30" + char4 + "#"
+            # let projectInfo = "7e30!#" ;
             serial.write_string(projectInfo3)
         else:
             OutName2 = OutmodeName2 + 96
@@ -155,6 +156,7 @@ class Blinkit_driver:
     # % block="All"
     # % block="舵机"
     # % block="直流电机"
+    # % block="双路直流电机"
     # % block="Led8x8"
     # % block="LED_RGB"
     # % block="Mp3"
@@ -165,6 +167,7 @@ class Blinkit_driver:
         Outmode3 = 3
         Outmode4 = 4
         Outmode5 = 5
+        Outmode6 = 6
     # % block="1"
     # % block="2"
     # % block="3"
@@ -173,7 +176,7 @@ class Blinkit_driver:
     # % block="6"
     # % block="7"
     # % block="8"
-    class Outmode6(Enum):
+    class Outmode7(Enum):
         Outmode0 = 0
         Outmode1 = 1
         Outmode2 = 2
@@ -182,12 +185,12 @@ class Blinkit_driver:
         Outmode5 = 5
         Outmode6 = 6
         Outmode7 = 7
-    # % block="向右"
     # % block="向左"
+    # % block="向右"
     # % block="变化"
     class Led8x8_DH2(Enum):
-        Right = 0
-        Left = 1
+        Left = 0
+        Right = 1
         Change = 2
     # % block="随机"
     # % block="环绕"
@@ -278,7 +281,7 @@ class Blinkit_driver:
         serial.write_string(projectInfo7)
     """
     
-    Led8x8 driver blocks
+    Led8x8 driver blocks    ok
     
     @param Led8x8 which Led8x8 to turn on
     @param dir which direction to go
@@ -294,7 +297,12 @@ class Blinkit_driver:
         asciiCode5 = PosNum11 + 32
         # ASCII码对应
         char9 = asciiToChar(asciiCode5)
-        projectInfo8 = "7e30" + char9 + "#"
+        Wv = 32 + Dh2 * 10 + speed
+        length: number = len(s) + 53
+        # 48+5
+        char24 = asciiToChar(length)
+        char33 = asciiToChar(Wv)
+        projectInfo8 = "7e" + char24 + "d" + char9 + "!" + char33 + s + "#"
         serial.write_string(projectInfo8)
     """
     
@@ -315,12 +323,27 @@ class Blinkit_driver:
     def LedRGB(PosNum12: PosNum, Red: number, Green: number, Blue: number, Dh3: LedRGB_DH):
         asciiCode6 = PosNum12 + 32
         # ASCII码对应
+        asciiCode22 = Dh3 + 32 + 1
+        # ASCII码对应
+        Red1 = Red % 10 + 32
+        Red = Red / 10 + 32
+        Green1 = Green % 10 + 32
+        Green = Green / 10 + 32
+        Blue1 = Blue % 10 + 32
+        Blue = Blue / 10 + 32
         char10 = asciiToChar(asciiCode6)
-        projectInfo9 = "7e30" + char10 + "#"
+        char25 = asciiToChar(asciiCode22)
+        char34 = asciiToChar(Red)
+        char42 = asciiToChar(Red1)
+        char52 = asciiToChar(Green)
+        char62 = asciiToChar(Green1)
+        char72 = asciiToChar(Blue)
+        char82 = asciiToChar(Blue1)
+        projectInfo9 = "7e:e" + char10 + char25 + char34 + char42 + char52 + char62 + char72 + char82 + "#"
         serial.write_string(projectInfo9)
     """
     
-    Mp3 driver blocks
+    Mp3 driver blocks   ok!
     @param Mp3 which Led8x8 to turn on
     @param dir which direction to go
     @param speed how fast
@@ -328,16 +351,19 @@ class Blinkit_driver:
     """
     # % subcategory="Mp3"
     # % blockId=Mp3
-    # % block="Mp3,位置%PosNum|动画%Dh"
+    # % block="Mp3,位置%PosNum|%Dh"
     def Mp3(PosNum13: PosNum, Dh4: Mp3_DH):
         asciiCode7 = PosNum13 + 32
         # ASCII码对应
+        asciiCode23 = Dh4 + 32
+        # ASCII码对应
         char11 = asciiToChar(asciiCode7)
-        projectInfo10 = "7e30" + char11 + "#"
+        char26 = asciiToChar(asciiCode23)
+        projectInfo10 = "7e4f" + char11 + char26 + "#"
         serial.write_string(projectInfo10)
     """
     
-    Mp3 driver blocks
+    Mp3 driver blocks   ok!
     @param Mp3 which Led8x8 to turn on
     @param dir which direction to go
     @param speed how fast
@@ -350,12 +376,15 @@ class Blinkit_driver:
     def Mp3_2(PosNum14: PosNum, Vol: number):
         asciiCode8 = PosNum14 + 32
         # ASCII码对应
+        asciiCode24 = Vol + 32
+        # ASCII码对应
         char12 = asciiToChar(asciiCode8)
-        projectInfo11 = "7e30" + char12 + "#"
+        char27 = asciiToChar(asciiCode24)
+        projectInfo11 = "7e5f" + char12 + "+" + char27 + "#"
         serial.write_string(projectInfo11)
     """
     
-    Mp3 driver blocks
+    Mp3 driver blocks   ok!
     @param Mp3 which Led8x8 to turn on
     @param dir which direction to go
     @param speed how fast
@@ -368,8 +397,11 @@ class Blinkit_driver:
     def Mp3_3(PosNum15: PosNum, Xq: number):
         asciiCode9 = PosNum15 + 32
         # ASCII码对应
+        asciiCode25 = Xq + 32
+        # ASCII码对应
         char13 = asciiToChar(asciiCode9)
-        projectInfo12 = "7e30" + char13 + "#"
+        char28 = asciiToChar(asciiCode25)
+        projectInfo12 = "7e5f" + char13 + "*" + char28 + "#"
         serial.write_string(projectInfo12)
     """
     
@@ -388,14 +420,22 @@ class Blinkit_driver:
     def Servo_360(PosNum16: PosNum, Sc2: number, speed2: number):
         asciiCode10 = PosNum16 + 32
         # ASCII码对应
+        asciiCode26 = speed2 + 32
+        # ASCII码对应
+        Sc22 = Sc2 % 10 + 32
+        # ASCII码对应
+        Sc2 = Sc2 / 10 + 32
+        # ASCII码对应
         char14 = asciiToChar(asciiCode10)
-        projectInfo13 = "7e30" + char14 + "#"
+        char29 = asciiToChar(asciiCode26)
+        char35 = asciiToChar(Sc2)
+        char43 = asciiToChar(Sc22)
+        projectInfo13 = "7e6a" + char14 + char29 + char35 + char43 + "#"
         serial.write_string(projectInfo13)
     """
     
     Servo driver blocks
-    
-    @param Led8x8 which Led8x8 to turn on
+    @param Servo which Servo to turn on
     @param dir which direction to go
     @param speed how fast
     
@@ -408,8 +448,17 @@ class Blinkit_driver:
     def Servo_180(PosNum17: PosNum, Sc3: number, speed3: number):
         asciiCode11 = PosNum17 + 32
         # ASCII码对应
+        asciiCode27 = speed3 + 32
+        # ASCII码对应
+        Sc23 = Sc3 % 10 + 32
+        # ASCII码对应
+        Sc3 = Sc3 / 10 + 32
+        # ASCII码对应
         char15 = asciiToChar(asciiCode11)
-        projectInfo14 = "7e30" + char15 + "#"
+        char210 = asciiToChar(asciiCode27)
+        char36 = asciiToChar(Sc3)
+        char44 = asciiToChar(Sc23)
+        projectInfo14 = "7e6a" + char15 + char210 + char36 + char44 + "#"
         serial.write_string(projectInfo14)
     """
     
@@ -427,6 +476,15 @@ class Blinkit_driver:
     def Motorx1(PosNum18: PosNum, dir2: Motor_DH, speed4: number):
         asciiCode12 = PosNum18 + 32
         # ASCII码对应
+        asciiCode28 = dir2 + 32
+        # ASCII码对应
+        asciiCode32 = speed4 + 32
+        # ASCII码对应
+        speed22 = speed4 % 10 + 32
+        speed4 = speed4 / 10 + 32
         char16 = asciiToChar(asciiCode12)
-        projectInfo15 = "7e30" + char16 + "#"
+        char211 = asciiToChar(asciiCode28)
+        char37 = asciiToChar(speed4)
+        char45 = asciiToChar(speed22)
+        projectInfo15 = "7e6b" + char16 + char211 + char37 + char45 + "#"
         serial.write_string(projectInfo15)
