@@ -291,7 +291,7 @@ namespace Blinkit_driver {
     * @param dir which direction to go
     * @param speed how fast
     */
-    //% subcategory="8x8"
+    //% subcategory="Led_8x8"
     //% blockId=Led8x8_off
     //% block="8x8,位置%PosNum|,清空屏幕, 动画%Dh"
     export function Led8x8(PosNum: PosNum, Dh: Led8x8_DH): void {
@@ -311,7 +311,7 @@ namespace Blinkit_driver {
     * @param speed how fast
     * @param s is the text will be show, eg: 'Hello!'
     */
-    //% subcategory="8x8"
+    //% subcategory="Led_8x8"
     //% blockId=Led8x8_String
     //% block="8x8,位置%PosNum|显示字符串%s|动画%Dh|速度 %speed"
     //% speed.min=1 speed.max=6
