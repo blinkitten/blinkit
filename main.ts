@@ -376,7 +376,7 @@ namespace Blinkit_driver {
         const asciiCode2 = Dh + 32; // ASCII码对应
         const char = asciiToChar(asciiCode);
         const char2 = asciiToChar(asciiCode2);
-        let projectInfo = "7e4f" + char + char2 + "#"
+        let projectInfo = "7e4f" + char + char2  +"#"
         serial.writeString(projectInfo);
     }
 
@@ -439,7 +439,7 @@ namespace Blinkit_driver {
         const char2 = asciiToChar(asciiCode2);
         const char3 = asciiToChar(Sc);
         const char4 = asciiToChar(Sc2);
-        let projectInfo = "7e6a" + char + char2 + char3 + char4 + "#";
+        let projectInfo = "7e6a" + char + char2 + char3 + char4 + "#" ;
         serial.writeString(projectInfo);
     }
 
@@ -467,4 +467,28 @@ namespace Blinkit_driver {
         serial.writeString(projectInfo);
     }
 
+    /**
+        * Motorx1 driver blocks
+        
+        * @param Motorx1 which Motorx1 to turn on
+        * @param dir which direction to go
+        * @param speed how fast
+        */
+    //% subcategory="Motor"
+    //% blockId=Motorx1
+    //% block="直流电机,位置%PosNum|转动方向%dir|速度 %speed"
+    //% speed.min=0 speed.max=255
+    export function Motorx1(PosNum: PosNum, dir: Motor_DH, speed: number): void {
+        const asciiCode = PosNum + 32; // ASCII码对应
+        const asciiCode2 = dir + 32; // ASCII码对应
+        const asciiCode3 = speed + 32; // ASCII码对应
+        const speed2 = speed % 10 + 32;
+        speed = speed / 10 + 32;
+        const char = asciiToChar(asciiCode);
+        const char2 = asciiToChar(asciiCode2);
+        const char3 = asciiToChar(speed);
+        const char4 = asciiToChar(speed2);
+        let projectInfo = "7e6b" + char + char2 + char3 + char4 +"#"
+        serial.writeString(projectInfo);
+    }
 }
