@@ -419,7 +419,7 @@ namespace Blinkit_driver {
     }
 
     /**
-        * Servo driver blocks
+        * Servo driver blocks   ok!
         
         * @param Servo_1 which Servo_1 to turn on
         * @param dir which direction to go
@@ -444,7 +444,7 @@ namespace Blinkit_driver {
     }
 
     /**
-    * Servo driver blocks
+    * Servo driver blocks   ok!
     * @param Servo which Servo to turn on
     * @param dir which direction to go
     * @param speed how fast
@@ -468,7 +468,7 @@ namespace Blinkit_driver {
     }
 
     /**
-        * Motorx1 driver blocks
+        * Motorx1 driver blocks   ok!
         
         * @param Motorx1 which Motorx1 to turn on
         * @param dir which direction to go
