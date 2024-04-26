@@ -133,29 +133,29 @@ namespace Blinkit_driver {
     }
 
     export enum SensorName {
-        //% block="光敏电阻"
+        //% block="Light"
         Sensor0,
-        //% block="按键"
+        //% block="Click"
         Sensor1,
-        //% block="摇杆"
+        //% block="joystick"
         Sensor2,
-        //% block="旋钮电位器"
+        //% block="Angle"
         Sensor3,
-        //% block="推杆电位器"
+        //% block="Push"
         Sensor4,
-        //% block="语音识别"
+        //% block="ASR"
         Sensor5,
-        //% block="倾斜"
+        //% block="Title"
         Sensor6,
-        //% block="触摸"
+        //% block="Touch"
         Sensor7,
-        //% block="温湿度"
+        //% block="TEMP&HUM"
         Sensor8,
-        //% block="激光测距"
+        //% block="Distance"
         Sensor9,
-        //% block="土壤湿度"
+        //% block="Soil Moisture"
         Sensor10,
-        //% block="手势"
+        //% block="Gesture"
         Sensor11,
     }
 
