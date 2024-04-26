@@ -1,5 +1,5 @@
 
-> 在 [https://blinkitten.github.io/bbb/](https://blinkitten.github.io/bbb/) 打开此页面
+> 在 [https://blinkitten.github.io/bbb/](https://blinkitten.github.io/blinkitten/) 打开此页面
 
 ## 用作扩展
 
@@ -8,7 +8,7 @@
 * 打开 [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * 点击 **新项目**
 * 点击齿轮图标菜单下的 **扩展**
-* 搜索 **https://github.com/blinkitten/bbb** 并导入
+* 搜索 **https://github.com/blinkitten/blinkit** 并导入
 
 ## 编辑此项目
 
