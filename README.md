@@ -1,6 +1,3 @@
-
-> 在 [https://blinkitten.github.io/blinkit/](https://blinkitten.github.io/blinkitten/) 打开此页面
-
 ## 用作扩展
 
 此仓库可以作为 **插件** 添加到 MakeCode 中。
