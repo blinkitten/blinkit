@@ -333,7 +333,7 @@ namespace Blinkit_driver {
     * @param dir which direction to go
     * @param speed how fast
     */
-    //% subcategory="LED_RGB"
+    //% subcategory="Led_RGB"
     //% blockId=Led_RGB
     //% block="Led_RGB%PosNum|颜色R %Red|G %Green|B %Blue|动画%Dh"
     //% speed.min=1 speed.max=6
