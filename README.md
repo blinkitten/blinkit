@@ -1,5 +1,5 @@
 
-> 在 [https://blinkitten.github.io/bbb/](https://blinkitten.github.io/blinkitten/) 打开此页面
+> 在 [https://blinkitten.github.io/blinkit/](https://blinkitten.github.io/blinkitten/) 打开此页面
 
 ## 用作扩展
 
@@ -16,7 +16,7 @@
 
 * 打开 [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * 点击 **导入**，然后点击 **导入 URL**
-* 粘贴 **https://github.com/blinkitten/bbb** 并点击导入
+* 粘贴 **https://github.com/blinkitten/blinkit** 并点击导入
 
 #### 元数据（用于搜索、渲染）
 
