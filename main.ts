@@ -427,7 +427,7 @@ namespace Blinkit_driver {
         */
     //% subcategory="Servo"
     //% blockId=Servo
-    //% block="180舵机%PosNum|转到%Sc|速度 %speed"
+    //% block="Servo_180%PosNum|转到%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
     //% speed.min=1 speed.max=10
     export function Servo_360(PosNum: PosNum, Sc: number, speed: number): void {
@@ -451,7 +451,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Servo"
     //% blockId=Servo_2
-    //% block="360舵机%PosNum|pwm%Sc|速度 %speed"
+    //% block="Servo_360%PosNum|pwm%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
     //% speed.min=1 speed.max=10
     export function Servo_180(PosNum: PosNum, Sc: number, speed: number): void {
@@ -476,7 +476,7 @@ namespace Blinkit_driver {
         */
     //% subcategory="Motor"
     //% blockId=Motorx1
-    //% block="直流电机%PosNum|转动方向%dir|速度 %speed"
+    //% block="Motor%PosNum|转动方向%dir|速度 %speed"
     //% speed.min=0 speed.max=255
     export function Motorx1(PosNum: PosNum, dir: Motor_DH, speed: number): void {
         const asciiCode = PosNum + 32; // ASCII码对应
