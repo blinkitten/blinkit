@@ -1,7 +1,7 @@
 /**
  * Blocks for Blinkit Board
  */
-//% weight=100 color=#0855AA icon="\uf1fc" block="Blinkit"
+//% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 
 namespace Blinkit_driver {
     /**
@@ -468,7 +468,7 @@ namespace Blinkit_driver {
     }
 
     /**
-        * Motorx1 driver blocks   ok!
+        * Motorx1 driver blocks    ok!
         
         * @param Motorx1 which Motorx1 to turn on
         * @param dir which direction to go
