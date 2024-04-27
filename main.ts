@@ -1,7 +1,7 @@
 /**
  * Blocks for Blinkit Board
  */
-//% weight=100 color=#0855AA icon="\uf21c" block="Blinkit"
+//% weight=100 color=#0855AA icon="\uf1fc" block="Blinkit"
 
 namespace Blinkit_driver {
     /**
