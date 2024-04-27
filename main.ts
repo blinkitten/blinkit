@@ -468,7 +468,7 @@ namespace Blinkit_driver {
     }
 
     /**
-        * Motorx1 driver blocks    ok!
+        * Motorx1 driver blocks    !ok!
         
         * @param Motorx1 which Motorx1 to turn on
         * @param dir which direction to go
