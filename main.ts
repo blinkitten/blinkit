@@ -376,7 +376,7 @@ namespace Blinkit_driver {
         const asciiCode2 = Dh + 32; // ASCII码对应
         const char = asciiToChar(asciiCode);
         const char2 = asciiToChar(asciiCode2);
-        let projectInfo = "7e4f" + char + char2  +"#"
+        let projectInfo = "7e4f" + char + char2 + "#"
         serial.writeString(projectInfo);
     }
 
@@ -439,7 +439,7 @@ namespace Blinkit_driver {
         const char2 = asciiToChar(asciiCode2);
         const char3 = asciiToChar(Sc);
         const char4 = asciiToChar(Sc2);
-        let projectInfo = "7e6a" + char + char2 + char3 + char4 + "#" ;
+        let projectInfo = "7e6a" + char + char2 + char3 + char4 + "#";
         serial.writeString(projectInfo);
     }
 
@@ -488,7 +488,8 @@ namespace Blinkit_driver {
         const char2 = asciiToChar(asciiCode2);
         const char3 = asciiToChar(speed);
         const char4 = asciiToChar(speed2);
-        let projectInfo = "7e6b" + char + char2 + char3 + char4 +"#";
+        let projectInfo = "7e6b" + char + char2 + char3 + char4 + "#";
         serial.writeString(projectInfo);
     }
+
 }
