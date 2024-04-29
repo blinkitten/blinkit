@@ -194,6 +194,12 @@ namespace Blinkit_driver {
         Outmode7,
 
     }
+    export enum Led8x8_DH3 {
+        //% block="熄灭"
+        Off,
+        //% block="点亮"
+        On,
+    }
 
     export enum Led8x8_DH2 {
         //% block="向左"
@@ -323,6 +329,50 @@ namespace Blinkit_driver {
         const char2 = asciiToChar(length);
         const char3 = asciiToChar(Wv);
         let projectInfo = "7e" + char2 + "d" + char + "!" + char3 + s + "#";
+        serial.writeString(projectInfo);
+    }
+
+    /**
+    * Led8x8 driver blocks    ok
+    
+    * @param Led8x8 which Led8x8 to turn on
+    * @param dir which direction to go
+    * @param speed how fast
+    * @param s is the text will be show, eg: 'Hello!'
+    */
+    //% subcategory="Led_8x8"
+    //% blockId=Led8x8_onoff
+    //% block="Led_8x8%PosNum|坐标X:%L_l|坐标Y:%L_h|%Dh"
+    //% L_l.min=1 L_l.max=8
+    //% L_h.min=1 L_h.max=8
+    export function Led8x8_2(PosNum: PosNum, L_l: number, L_h: number, Dh: Led8x8_DH3): void {
+        let L_n = L_l+L_h*8 - 9 + 48 ;
+        const char = asciiToChar(L_n);
+        let projectInfo = "7e6d" + PosNum + "3" + Dh + char + "#";
+        serial.writeString(projectInfo);
+    }
+
+    /**
+    * Led8x8 driver blocks    ok
+    
+    * @param Led8x8 which Led8x8 to turn on
+    * @param dir which direction to go
+    * @param speed how fast
+    * @param s is the text will be show, eg: 'Hello!'
+    */
+    //% subcategory="Led_8x8"
+    //% blockId=Led8x8_move
+    //% block="Led_8x8%PosNum|熄灭坐标X:%L_l|坐标Y:%L_h|点亮坐标X:%L_l2|坐标Y:%L_h2|"
+    //% L_l.min=1 L_l.max=8
+    //% L_h.min=1 L_h.max=8
+    //% L_l2.min=1 L_l2.max=8
+    //% L_h2.min=1 L_h2.max=8
+    export function Led8x8_3(PosNum: PosNum, L_l: number, L_h: number, L_l2: number, L_h2: number): void {
+        let L_n = L_l + L_h * 8 - 9 + 48;
+        let L_n2 = L_l2 + L_h2 * 8 - 9 + 48;
+        const char = asciiToChar(L_n);
+        const char2 = asciiToChar(L_n2);
+        let projectInfo = "7e6d" + PosNum + "4" + char + char2 + "#";
         serial.writeString(projectInfo);
     }
 
