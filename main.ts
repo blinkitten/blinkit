@@ -369,23 +369,17 @@ namespace Blinkit_driver {
     //% Green.min=0 Green.max=255
     //% Blue.min=0 Blue.max=255
     export function LedRGB(PosNum: PosNum, Red: number, Green: number, Blue: number, Dh: LedRGB_DH): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const asciiCode2 = Dh + 32 + 1;    // ASCII码对应
-        const Red1 = Red % 10 + 32;
-        Red = Red / 10 + 32;
-        const Green1 = Green % 10 + 32;
-        Green = Green / 10 + 32;
-        const Blue1 = Blue % 10 + 32;
-        Blue = Blue / 10 + 32;
-        const char = asciiToChar(asciiCode);
-        const char2 = asciiToChar(asciiCode2);
-        const char3 = asciiToChar(Red);
-        const char4 = asciiToChar(Red1);
-        const char5 = asciiToChar(Green);
-        const char6 = asciiToChar(Green1);
-        const char7 = asciiToChar(Blue);
-        const char8 = asciiToChar(Blue1);
-        let projectInfo = "7e:e" + char + char2 + char3 + char4 + char5 + char6 + char7 + char8 + "#";
+        Dh = Dh  + 1;    // ASCII码对应
+        const Red1 = Red % 10;
+        Red = Red / 10 + 48;
+        const Green1 = Green % 10;
+        Green = Green / 10 + 48;
+        const Blue1 = Blue % 10;
+        Blue = Blue / 10 + 48;
+        const char = asciiToChar(Red);
+        const char2 = asciiToChar(Green);
+        const char3 = asciiToChar(Blue);
+        let projectInfo = "7e:e" + PosNum + Dh + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
         serial.writeString(projectInfo);
     }
 
@@ -399,11 +393,7 @@ namespace Blinkit_driver {
     //% blockId=Player
     //% block="Player%PosNum|%Dh"
     export function Player(PosNum: PosNum, Dh: Mp3_DH): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const asciiCode2 = Dh + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        const char2 = asciiToChar(asciiCode2);
-        let projectInfo = "7e4f" + char + char2 + "#"
+        let projectInfo = "7e4f" + PosNum + Dh + "#"
         serial.writeString(projectInfo);
     }
 
@@ -418,11 +408,9 @@ namespace Blinkit_driver {
     //% block="Player%PosNum|设置音量%Vol"
     //% Vol.min=0 Vol.max=28
     export function Player_2(PosNum: PosNum, Vol: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const asciiCode2 = Vol + 32; // ASCII码对应
+        const asciiCode = Vol + 48; // ASCII码对应
         const char = asciiToChar(asciiCode);
-        const char2 = asciiToChar(asciiCode2);
-        let projectInfo = "7e5f" + char + "+" + char2 + "#"
+        let projectInfo = "7e5f" + PosNum + ";" + char + "#"
         serial.writeString(projectInfo);
     }
 
@@ -437,11 +425,9 @@ namespace Blinkit_driver {
     //% block="Player%PosNum|播放第 %Xq|首"
     //% Xq.min=1 Xq.max=10
     export function Player_3(PosNum: PosNum, Xq: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const asciiCode2 = Xq + 32; // ASCII码对应
+        const asciiCode = Xq + 48; // ASCII码对应
         const char = asciiToChar(asciiCode);
-        const char2 = asciiToChar(asciiCode2);
-        let projectInfo = "7e5f" + char + "*" + char2 + "#"
+        let projectInfo = "7e5f" + PosNum + ":" + char + "#"
         serial.writeString(projectInfo);
     }
 
@@ -456,17 +442,12 @@ namespace Blinkit_driver {
     //% blockId=Servo
     //% block="Servo_180%PosNum|转到%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
-    //% speed.min=1 speed.max=10
+    //% speed.min=0 speed.max=8
     export function Servo_360(PosNum: PosNum, Sc: number, speed: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const asciiCode2 = speed + 32; // ASCII码对应
-        const Sc2 = Sc % 10 + 32; // ASCII码对应
-        Sc = Sc / 10 + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        const char2 = asciiToChar(asciiCode2);
-        const char3 = asciiToChar(Sc);
-        const char4 = asciiToChar(Sc2);
-        let projectInfo = "7e6a" + char + char2 + char3 + char4 + "#";
+        const Sc2 = Sc % 10 ; 
+        Sc = Sc / 10 + 48; // ASCII码对应
+        const char = asciiToChar(Sc);
+        let projectInfo = "7e6a" + PosNum + speed + char + Sc2 + "#";
         serial.writeString(projectInfo);
     }
 
@@ -480,17 +461,12 @@ namespace Blinkit_driver {
     //% blockId=Servo_2
     //% block="Servo_360%PosNum|pwm%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
-    //% speed.min=1 speed.max=10
+    //% speed.min=0 speed.max=8
     export function Servo_180(PosNum: PosNum, Sc: number, speed: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const asciiCode2 = speed + 32; // ASCII码对应
-        const Sc2 = Sc % 10 + 32; // ASCII码对应
-        Sc = Sc / 10 + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        const char2 = asciiToChar(asciiCode2);
-        const char3 = asciiToChar(Sc);
-        const char4 = asciiToChar(Sc2);
-        let projectInfo = "7e6a" + char + char2 + char3 + char4 + "#";
+        const Sc2 = Sc % 10 ; 
+        Sc = Sc / 10 + 48; // ASCII码对应
+        const char = asciiToChar(Sc);
+        let projectInfo = "7e6a" + PosNum + speed + char + Sc2 + "#";
         serial.writeString(projectInfo);
     }
 
@@ -506,16 +482,10 @@ namespace Blinkit_driver {
     //% block="Motor%PosNum|转动方向%dir|速度 %speed"
     //% speed.min=0 speed.max=255
     export function Motorx1(PosNum: PosNum, dir: Motor_DH, speed: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const asciiCode2 = dir + 32; // ASCII码对应
-        const asciiCode3 = speed + 32; // ASCII码对应
-        const speed2 = speed % 10 + 32;
-        speed = speed / 10 + 32;
-        const char = asciiToChar(asciiCode);
-        const char2 = asciiToChar(asciiCode2);
-        const char3 = asciiToChar(speed);
-        const char4 = asciiToChar(speed2);
-        let projectInfo = "7e6b" + char + char2 + char3 + char4 + "#";
+        const speed2 = speed % 10 ;
+        speed = speed / 10 + 48;
+        const char = asciiToChar(speed);
+        let projectInfo = "7e6b" + PosNum + dir + char + speed2 + "#";
         serial.writeString(projectInfo);
     }
 
