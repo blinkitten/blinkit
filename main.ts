@@ -29,21 +29,19 @@ namespace Blinkit_driver {
     //% Sc.min=0 Sc.max=180
     export function normal2(OutmodeName: OutmodeName, Sc: number): void {
         if (OutmodeName == 0) {
-            const OutValue = Sc / 10 + 32; // ASCII码对应
-            const OutValue2 = Sc % 10 + 32; // ASCII码对应
+            const OutValue = Sc / 10 + 48; // ASCII码对应
+            Sc = Sc % 10 ;
             const char = asciiToChar(OutValue);
-            const char2 = asciiToChar(OutValue2);
-            let projectInfo = "7e41" + char + char2 + "#";
+            let projectInfo = "7e41" + char + Sc  + "#";
             serial.writeString(projectInfo);
         }
         else {
             const OutName = OutmodeName + 96; // ASCII码对应
-            const OutValue = Sc / 10 + 32; // ASCII码对应
-            const OutValue2 = Sc % 10 + 32; // ASCII码对应
+            const OutValue = Sc / 10 + 48; // ASCII码对应
+            Sc = Sc % 10;
             const char = asciiToChar(OutName);
             const char2 = asciiToChar(OutValue);
-            const char3 = asciiToChar(OutValue2);
-            let projectInfo = "7e54" + char + char2 + char3 + "#";
+            let projectInfo = "7e54" + char + char2 + Sc + "#";
             serial.writeString(projectInfo);
         }
     }
@@ -58,24 +56,21 @@ namespace Blinkit_driver {
     //% block="指定%OutmodeName|触发 %Outmode"
     export function normal(OutmodeName: OutmodeName, Outmode: Outmode): void {
         if (OutmodeName == 0) {
-            const OutValue = Outmode + 33; // ASCII码对应
-            const char = asciiToChar(OutValue);
-            let projectInfo = "7e30" + char + "#";
-            //let projectInfo = "7e30!#" ;
+            Outmode = Outmode + 1; // ASCII码对应
+            let projectInfo = "7e30" + Outmode + "#";
             serial.writeString(projectInfo);
         }
         else {
             const OutName = OutmodeName + 96; // ASCII码对应
-            const OutValue = Outmode + 32; // ASCII码对应
+            Outmode = Outmode + 1; // ASCII码对应
             const char = asciiToChar(OutName);
-            const char2 = asciiToChar(OutValue);
-            let projectInfo = "7e43" + char + char2 + "#";
+            let projectInfo = "7e43" + char + Outmode + "#";
             serial.writeString(projectInfo);
         }
     }
 
     /**
-        * Sensor driver blocks
+        * Sensor driver blocks ???
         * @param Sensor which Sensor to turn on
         * @param dir which direction to go
         * @param speed how fast
@@ -89,7 +84,7 @@ namespace Blinkit_driver {
         serial.writeString(projectInfo);
     }
     /**
-            * Sensor driver blocks
+            * Sensor driver blocks ???
             * @param Sensor which Sensor to turn on
             * @param dir which direction to go
             * @param speed how fast
@@ -103,7 +98,7 @@ namespace Blinkit_driver {
         serial.writeString(projectInfo);
     }
 
-    /**
+    /**  ???
      * Returns the distance to an object in a range from 1 to 300 centimeters or up to 118 inch.
      * The maximum value is returned to indicate when no object was detected.
      * -1 is returned when the device is not connected.
@@ -119,13 +114,6 @@ namespace Blinkit_driver {
         basic.pause(0); // yield to allow background processing when called in a tight loop
         return "2";
     }
-
-
-
-
-
-
-
 
     function asciiToChar(asciiCode: number): string {
         // 使用String.fromCharCode方法将ASCII码转换为字符  
@@ -289,8 +277,6 @@ namespace Blinkit_driver {
         PosNum9,
     }
 
-
-
     /**
     * Led8x8 driver blocks   ok
     * @param Led8x8 which Led8x8 to turn on
@@ -301,13 +287,9 @@ namespace Blinkit_driver {
     //% blockId=Led8x8_off
     //% block="Led_8x8%PosNum|,清空屏幕, 动画%Dh"
     export function Led8x8(PosNum: PosNum, Dh: Led8x8_DH): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        let projectInfo = "7e5d" + char + "  #"
+        let projectInfo = "7e5d" + PosNum + "0" + Dh  + "#"
         serial.writeString(projectInfo);
     }
-
-
 
     /**
     * Led8x8 driver blocks    ok
@@ -322,13 +304,11 @@ namespace Blinkit_driver {
     //% block="Led_8x8%PosNum|显示字符串%s|动画%Dh|速度 %speed"
     //% speed.min=1 speed.max=6
     export function Led8x8_1(PosNum: PosNum, s: string, Dh: Led8x8_DH2, speed: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        let Wv = 32 + Dh * 10 + speed;
+        let Wv = 48 + Dh * 10 + speed;
         let length: number = s.length + 53; //48+5
-        const char2 = asciiToChar(length);
-        const char3 = asciiToChar(Wv);
-        let projectInfo = "7e" + char2 + "d" + char + "!" + char3 + s + "#";
+        const char = asciiToChar(length);
+        const char2 = asciiToChar(Wv);
+        let projectInfo = "7e" + char + "d" + PosNum + 1 + char2 + s + "#";
         serial.writeString(projectInfo);
     }
 
@@ -345,7 +325,7 @@ namespace Blinkit_driver {
     //% block="Led_8x8%PosNum|坐标X:%L_l|坐标Y:%L_h|%Dh"
     //% L_l.min=1 L_l.max=8
     //% L_h.min=1 L_h.max=8
-    export function Led8x8_2(PosNum: PosNum, L_l: number, L_h: number, Dh: Led8x8_DH3): void {
+    export function Led8x8_3(PosNum: PosNum, L_l: number, L_h: number, Dh: Led8x8_DH3): void {
         let L_n = L_l+L_h*8 - 9 + 48 ;
         const char = asciiToChar(L_n);
         let projectInfo = "7e6d" + PosNum + "3" + Dh + char + "#";
@@ -353,8 +333,7 @@ namespace Blinkit_driver {
     }
 
     /**
-    * Led8x8 driver blocks    ok
-    
+    * Led8x8 driver blocks    ok  
     * @param Led8x8 which Led8x8 to turn on
     * @param dir which direction to go
     * @param speed how fast
@@ -362,12 +341,12 @@ namespace Blinkit_driver {
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_move
-    //% block="Led_8x8%PosNum|熄灭坐标X:%L_l|坐标Y:%L_h|点亮坐标X:%L_l2|坐标Y:%L_h2|"
+    //% block="Led_8x8%PosNum|熄灭,坐标:|X:%L_l Y:%L_h|点亮,坐标:|X:%L_l2 Y:%L_h2"
     //% L_l.min=1 L_l.max=8
     //% L_h.min=1 L_h.max=8
     //% L_l2.min=1 L_l2.max=8
     //% L_h2.min=1 L_h2.max=8
-    export function Led8x8_3(PosNum: PosNum, L_l: number, L_h: number, L_l2: number, L_h2: number): void {
+    export function Led8x8_4(PosNum: PosNum, L_l: number, L_h: number, L_l2: number, L_h2: number): void {
         let L_n = L_l + L_h * 8 - 9 + 48;
         let L_n2 = L_l2 + L_h2 * 8 - 9 + 48;
         const char = asciiToChar(L_n);
@@ -378,7 +357,6 @@ namespace Blinkit_driver {
 
     /**
     * LedRGB driver blocks
-    
     * @param LedRGB which Led8x8 to turn on
     * @param dir which direction to go
     * @param speed how fast
@@ -409,7 +387,6 @@ namespace Blinkit_driver {
         const char8 = asciiToChar(Blue1);
         let projectInfo = "7e:e" + char + char2 + char3 + char4 + char5 + char6 + char7 + char8 + "#";
         serial.writeString(projectInfo);
-
     }
 
     /**
