@@ -7,9 +7,9 @@ namespace Blinkit_driver {
     /**
      * BLINKIT initialize
      */
-    //% blockId="BLINKIT_I2C_init" block="初始化BLINKIT"
+    //% blockId="BLINKIT_Serial_init" block="初始化BLINKIT"
     //% weight=100 blockGap=8
-    //% parts=BLINKIT_I2C trackArgs=0
+    //% parts=BLINKIT_Serial trackArgs=0
     export function init() {
         serial.redirect(
             SerialPin.P8,
@@ -107,12 +107,19 @@ namespace Blinkit_driver {
     //% blockId="Sensor_value3"
     //% block="获取%SensorName|%PosNum|数据"
     //% weight=60
-    export function Sensor3(SensorName: SensorName, PosNum: PosNum): string {
+    export function Sensor3(SensorName: SensorName, PosNum: PosNum): void {
+        SensorName = SensorName + 65 ;//转为ascii
+        const char = asciiToChar(SensorName);
+        let projectInfo = "7e4" + char + PosNum + "0#"
+        serial.writeString(projectInfo);
+
         if (true) {
-            return "1";
+            //return "1";
         }
-        basic.pause(0); // yield to allow background processing when called in a tight loop
-        return "2";
+        basic.pause(10); // yield to allow background processing when called in a tight loop
+        //return "2";
+        //let projectInfo = "7e301#" 
+        serial.writeString("7e301#");
     }
 
     function asciiToChar(asciiCode: number): string {
