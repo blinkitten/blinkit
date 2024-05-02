@@ -16,6 +16,7 @@ namespace Blinkit_driver {
             SerialPin.P12,
             BaudRate.BaudRate9600
         )
+        basic.pause(200);
     }
 
     /**
@@ -69,58 +70,7 @@ namespace Blinkit_driver {
         }
     }
 
-    /**
-        * Sensor driver blocks ???
-        * @param Sensor which Sensor to turn on
-        * @param dir which direction to go
-        * @param speed how fast
-        */
-    //% blockId=Sensor_value
-    //% block="如果%SensorName|%PosNum|数据> %Min"
-    export function Sensor(SensorName: SensorName, PosNum: PosNum, Min: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        let projectInfo = "7e30" + char + "#"
-        serial.writeString(projectInfo);
-    }
-    /**
-            * Sensor driver blocks ???
-            * @param Sensor which Sensor to turn on
-            * @param dir which direction to go
-            * @param speed how fast
-            */
-    //% blockId=Sensor_value2
-    //% block="如果%SensorName|%PosNum|数据< %Max"
-    export function Sensor2(SensorName: SensorName, PosNum: PosNum, Max: number): void {
-        const asciiCode = PosNum + 32; // ASCII码对应
-        const char = asciiToChar(asciiCode);
-        let projectInfo = "7e30" + char + "#"
-        serial.writeString(projectInfo);
-    }
 
-    /**  ???
-     * Returns the distance to an object in a range from 1 to 300 centimeters or up to 118 inch.
-     * The maximum value is returned to indicate when no object was detected.
-     * -1 is returned when the device is not connected.
-     * @param unit unit of distance, eg: DistanceUnit.CM
-     */
-    //% blockId="Sensor_value3"
-    //% block="获取%SensorName|%PosNum|数据"
-    //% weight=60
-    export function Sensor3(SensorName: SensorName, PosNum: PosNum): void {
-        SensorName = SensorName + 65 ;//转为ascii
-        const char = asciiToChar(SensorName);
-        let projectInfo = "7e4" + char + PosNum + "0#"
-        serial.writeString(projectInfo);
-
-        if (true) {
-            //return "1";
-        }
-        basic.pause(10); // yield to allow background processing when called in a tight loop
-        //return "2";
-        //let projectInfo = "7e301#" 
-        serial.writeString("7e301#");
-    }
 
     function asciiToChar(asciiCode: number): string {
         // 使用String.fromCharCode方法将ASCII码转换为字符  
@@ -497,21 +447,38 @@ namespace Blinkit_driver {
     }
 
 
+    /**
+     * 
+     */
+    //% weight=10
+    //% blockId=kb_event block="获取%SensorName|%PosNum|的数据"
+    export function IR_read_version(SensorName: SensorName, PosNum: PosNum): number {
+        SensorName = SensorName + 65;
+        const char = asciiToChar(SensorName);
+        let projectInfo = "7e4" + char + PosNum + "0#"
+        //serial.writeString(projectInfo);
+        serial.writeString("7e301#");
 
+        // for (let index = 0; index < dataLen; index++) {
+        //     version += String.fromCharCode(buf[index])
+        // }
+        let version = 0;
+        return version
+    }
 
     /**
     * Line tracking sensor event function
     */
     //% weight=2
-    //% blockId=kb_event block="如果%SensorName|%PosNum|> %b"
-    export function ltEvent(SensorName: SensorName, PosNum: PosNum, b: number , a: Action ) {
-        
+    //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
+    export function ltEvent(value: SensorName, vi: PosNum, xx: number, a: Action) {
+        let state = value + vi;
+        serial.writeNumber(state)
     }
     basic.forever(() => {
-        if (true) {
 
-        }
         basic.pause(50);
     })
+
 
 }
