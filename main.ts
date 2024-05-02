@@ -503,8 +503,8 @@ namespace Blinkit_driver {
     * Line tracking sensor event function
     */
     //% weight=2
-    //% blockId=kb_event block="on|%SensorName|%PosNum"
-    export function ltEvent(value: SensorName, vi: PosNum,  a: Action) {
+    //% blockId=kb_event block="如果%SensorName|%PosNum|> %b"
+    export function ltEvent(SensorName: SensorName, PosNum: PosNum, b: number , a: Action ) {
         
     }
     basic.forever(() => {
