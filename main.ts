@@ -495,4 +495,23 @@ namespace Blinkit_driver {
         let projectInfo = "7e6b" + PosNum + dir + char + speed2 + "#";
         serial.writeString(projectInfo);
     }
+
+
+
+
+    /**
+    * Line tracking sensor event function
+    */
+    //% weight=2
+    //% blockId=kb_event block="on|%SensorName|%PosNum"
+    export function ltEvent(value: number, vi: PosNum,  a: Action) {
+        
+    }
+    basic.forever(() => {
+        if (true) {
+
+        }
+        basic.pause(50);
+    })
+
 }
