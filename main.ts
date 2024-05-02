@@ -504,7 +504,7 @@ namespace Blinkit_driver {
     */
     //% weight=2
     //% blockId=kb_event block="on|%SensorName|%PosNum"
-    export function ltEvent(value: number, vi: PosNum,  a: Action) {
+    export function ltEvent(value: SensorName, vi: PosNum,  a: Action) {
         
     }
     basic.forever(() => {
