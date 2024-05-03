@@ -89,8 +89,10 @@ namespace Blinkit_driver {
         serial.writeString(projectInfo)
         //serial.writeString("7e301#")
         basic.pause(10);
-        let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
-        
+
+
+
+        let s:string = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
         //basic.showString(s)
         // let Wv = 48 + 20 + 6;
         // let length: number = s.length + 53; //48+5
@@ -99,20 +101,22 @@ namespace Blinkit_driver {
         // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
         // serial.writeString(s3);
 
-        //blinkitten_sensor: number[][] = []; //A0=123
         let length: number = s.length ;
-        let value_s: string = ""
-        for (let index = 3; index < length; index++) {
-            value_s += s[index]
+        if(length>3)
+        {
+            let value_s: string = ""
+            for (let index = 3; index < length; index++) {  //A0=123
+                value_s += s[index]
+            }
+            let valus_n: number = +value_s;
+            //let a: string = s[0]
+            //let b: string = s[1]
+            let a: number = s.charCodeAt(0) - 65
+            let b: number = +s[1]
+            blinkitten_sensor[a][b] = valus_n
+            basic.showNumber(valus_n)
         }
-        let valus_n: number = +value_s;
-        //let a: string = s[0]
-        //let b: string = s[1]
-        let a : number = s.charCodeAt(0) -65 
-        let b: number = +s[1]
-        blinkitten_sensor[a][b] = valus_n
-        basic.showNumber(valus_n)
-        
+
         //basic.showNumber(valus_n)
         //basic.showString(value_s)
 
