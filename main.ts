@@ -452,18 +452,34 @@ namespace Blinkit_driver {
      */
     //% weight=10
     //% blockId=kb_event block="获取%SensorName|%PosNum|的数据"
-    export function IR_read_version(SensorName: SensorName, PosNum: PosNum): number {
+    export function IR_read_version(SensorName: SensorName, PosNum: PosNum): string {
         SensorName = SensorName + 65;
         const char = asciiToChar(SensorName);
         let projectInfo = "7e4" + char + PosNum + "0#"
         serial.writeString(projectInfo)
-        let projectInfo2 = "" 
-        basic.pause(100)
+        //serial.writeString("7e301#");
+        basic.pause(500)
+        let s = "m"
+        while (serial.available() > 0) {
+            const c = serial.read()
+            s += c
+            basic.pause(5)
+        }
+        //let version = 0;
+        return s
+        
+        // let Wv = 48 + 20 + 4;
+        // let length: number = s.length + 53; //48+5
+        // const char2 = asciiToChar(length);
+        // const char3 = asciiToChar(Wv);
+        // let s2 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+        // serial.writeString(s2);
 
+        // basic.pause(1000)
         
         
-        let version = 0;
-        return version
+        
+        
     }
 
     /**
@@ -481,6 +497,7 @@ namespace Blinkit_driver {
         while (serial.available() > 0) {
             const c = serial.read()
             s += c
+            basic.pause(5)
         }
 
         let Wv = 48 + 20 + 4;
@@ -493,32 +510,18 @@ namespace Blinkit_driver {
 
         //serial.writeString("7e301#");
     }
-    basic.forever(() => {
-
-        basic.pause(50);
-    })
+    
 
 
 }
 
 
 
-
-
-// while (true) {
-//     while (serial.available() > 0) {
-//         const c = serial.read();
-//     }
-//     basic.pause(200);
-// }
-
-
 // for (let index = 0; index < dataLen; index++) {
 //     version += String.fromCharCode(buf[index])
 // }
 
-// while (serial.available() > 0) {
-//     const c = serial.read()
-//     projectInfo2 += c
-//     basic.pause(2)
-// }
+// basic.forever(() => {
+
+//     basic.pause(50);
+// })
