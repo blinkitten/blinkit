@@ -456,10 +456,10 @@ namespace Blinkit_driver {
         SensorName = SensorName + 65;
         const char = asciiToChar(SensorName);
         let projectInfo = "7e4" + char + PosNum + "0#"
-        serial.writeString(projectInfo)
-        //serial.writeString("7e301#");
+        //serial.writeString(projectInfo)
+        serial.writeString("7e4A00#");
         basic.pause(500)
-        let s = "m"
+        let s: string = ""
         while (serial.available() > 0) {
             const c = serial.read()
             s += c
@@ -467,7 +467,7 @@ namespace Blinkit_driver {
         }
         //let version = 0;
         return s
-        
+
         // let Wv = 48 + 20 + 4;
         // let length: number = s.length + 53; //48+5
         // const char2 = asciiToChar(length);
@@ -476,10 +476,6 @@ namespace Blinkit_driver {
         // serial.writeString(s2);
 
         // basic.pause(1000)
-        
-        
-        
-        
     }
 
     /**
@@ -510,7 +506,7 @@ namespace Blinkit_driver {
 
         //serial.writeString("7e301#");
     }
-    
+
 
 
 }
