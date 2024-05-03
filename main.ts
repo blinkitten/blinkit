@@ -477,13 +477,19 @@ namespace Blinkit_driver {
         let projectInfo = "7e4" + char + PosNum + "0#"
         serial.writeString(projectInfo)
         basic.pause(500)
-        let projectInfo2 = ""
-        
+        let s = ""
         while (serial.available() > 0) {
             const c = serial.read()
-            projectInfo2 += c
-
+            s += c
         }
+
+        let Wv = 48 + 20 + 4;
+        let length: number = s.length + 53; //48+5
+        const char2 = asciiToChar(length);
+        const char3 = asciiToChar(Wv);
+        let s2 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+        serial.writeString(s2);
+
 
         //serial.writeString("7e301#");
     }
