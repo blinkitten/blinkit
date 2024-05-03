@@ -4,7 +4,7 @@
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 namespace Blinkit_driver {
     let s3: string = "";
-    let blinkitten_sensor: number[][] = [];
+    let blinkitten_sensor: number[][] = [[]];
     /**
      * BLINKIT initialize
      */
@@ -74,13 +74,14 @@ namespace Blinkit_driver {
 
 
     /**
-            * Sensor driver blocks ???
+            * Sensor driver blocks 
             * @param Sensor which Sensor to turn on
             * @param dir which direction to go
             * @param speed how fast
             */
     //% blockId=Sensor_value
     //% block="获取%SensorName|%PosNum|数据"
+    //获取传感器数值 存入数组中
     export function Sensor(SensorName: SensorName, PosNum: PosNum): void {
         SensorName = SensorName + 65;
         const char = asciiToChar(SensorName);
@@ -88,9 +89,8 @@ namespace Blinkit_driver {
         serial.writeString(projectInfo)
         //serial.writeString("7e301#")
         basic.pause(10);
-        
-
         let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
+        
         //basic.showString(s)
         // let Wv = 48 + 20 + 6;
         // let length: number = s.length + 53; //48+5
@@ -101,21 +101,29 @@ namespace Blinkit_driver {
 
         //blinkitten_sensor: number[][] = []; //A0=123
         let length: number = s.length ;
-        let a = s[0] 
-        let b = s[1]
-        let value_s : string  = ""
+        let value_s: string = ""
         for (let index = 3; index < length; index++) {
             value_s += s[index]
         }
-        let valus_n = parseInt(value_s, 10);
-
-        let Wv = 48 + 20 + 6;
-        length = value_s.length + 53; //48+5
-        const char2 = asciiToChar(length);
-        const char3 = asciiToChar(Wv);
+        let valus_n: number = +value_s;
+        //let a: string = s[0]
+        //let b: string = s[1]
+        let a : number = s.charCodeAt(0) -65 
+        let b: number = +s[1]
+        blinkitten_sensor[a][b] = valus_n
+        basic.showNumber(valus_n)
         
-        s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + value_s + "#";
-        serial.writeString(s3);
+        //basic.showNumber(valus_n)
+        //basic.showString(value_s)
+
+        // value_s = asciiToChar(valus_n);
+        // let Wv = 48 + 20 + 6;
+        // length = value_s.length + 53; //48+5
+        // const char2 = asciiToChar(length);
+        // const char3 = asciiToChar(Wv);
+        
+        // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + value_s + "#";
+        // serial.writeString(s3);
 
         //basic.showString(value_s)
 
