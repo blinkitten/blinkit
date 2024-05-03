@@ -2,10 +2,9 @@
  * Blocks for Blinkit Board
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
-let s3: string = "";
-let blinkitten_sensor: number[][] = [];
 namespace Blinkit_driver {
-    
+    let s3: string = "";
+    let blinkitten_sensor: number[][] = [];
     /**
      * BLINKIT initialize
      */
@@ -93,12 +92,32 @@ namespace Blinkit_driver {
 
         let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
         //basic.showString(s)
+        // let Wv = 48 + 20 + 6;
+        // let length: number = s.length + 53; //48+5
+        // const char2 = asciiToChar(length);
+        // const char3 = asciiToChar(Wv);
+        // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+        // serial.writeString(s3);
+
+        //blinkitten_sensor: number[][] = []; //A0=123
+        let length: number = s.length ;
+        let a = s[0] 
+        let b = s[1]
+        let value_s : string  = ""
+        for (let index = 3; index < length; index++) {
+            value_s += s[index]
+        }
+        let valus_n = parseInt(value_s, 10);
+
         let Wv = 48 + 20 + 6;
-        let length: number = s.length + 53; //48+5
+        length = value_s.length + 53; //48+5
         const char2 = asciiToChar(length);
         const char3 = asciiToChar(Wv);
-        s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
-        //serial.writeString(s3);
+        
+        s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + value_s + "#";
+        serial.writeString(s3);
+
+        //basic.showString(value_s)
 
     }
 
