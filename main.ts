@@ -2,7 +2,8 @@
  * Blocks for Blinkit Board
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
-
+let s3: string = "";
+let blinkitten_sensor: number[][] = [];
 namespace Blinkit_driver {
     
     /**
@@ -87,8 +88,9 @@ namespace Blinkit_driver {
         let projectInfo = "7e4" + char + PosNum + "0#"
         serial.writeString(projectInfo)
         //serial.writeString("7e301#")
-        basic.pause(200);
+        basic.pause(10);
         
+
         let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
         //basic.showString(s)
         let Wv = 48 + 20 + 6;
@@ -96,7 +98,7 @@ namespace Blinkit_driver {
         const char2 = asciiToChar(length);
         const char3 = asciiToChar(Wv);
         s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
-        serial.writeString(s3);
+        //serial.writeString(s3);
 
     }
 
@@ -480,7 +482,7 @@ namespace Blinkit_driver {
 
 
 
-    let s3: string = "";
+    
 
 
 
