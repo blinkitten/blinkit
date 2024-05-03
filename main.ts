@@ -469,7 +469,7 @@ namespace Blinkit_driver {
 
 
 
-
+    let s3: string = "";
 
 
 
@@ -509,34 +509,32 @@ namespace Blinkit_driver {
     */
     //% weight=2
     //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
+    
     export function ltEvent(SensorName: SensorName, PosNum: PosNum, xx: number, a: Action) {
         // SensorName = SensorName + 65;
         // const char = asciiToChar(SensorName);
         // let projectInfo = "7e4" + char + PosNum + "0#"
         // serial.writeString(projectInfo)
         // basic.pause(500)
-        let s = ""
+        let s = "1"
         while (serial.available() > 0) {
             const c = serial.read()
             s += c
             basic.pause(5)
         }
-
         let Wv = 48 + 20 + 4;
         let length: number = s.length + 53; //48+5
         const char2 = asciiToChar(length);
         const char3 = asciiToChar(Wv);
-        let s2 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
-        serial.writeString(s2);
-
-
-        
+        s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+        //serial.writeString(s3);
     }
-basic.forever(() => {
-    //serial.writeString("7e301#");
-    //serial.writeString(s2);
-    basic.pause(3500);
-})
+    basic.forever(() => {
+        //serial.writeString("7e301#");
+        //serial.writeString(s2);
+        serial.writeString(s3);
+        basic.pause(3500);
+    })
 
 }
 
