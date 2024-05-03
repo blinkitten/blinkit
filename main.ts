@@ -457,6 +457,8 @@ namespace Blinkit_driver {
         const char = asciiToChar(SensorName);
         let projectInfo = "7e4" + char + PosNum + "0#"
         serial.writeString(projectInfo);
+
+
         //serial.writeString("7e301#");
 
         // for (let index = 0; index < dataLen; index++) {
@@ -481,19 +483,31 @@ namespace Blinkit_driver {
     })
 
     
+
+
 }
 
 
-// while (true) {
-//     while (serial.available() > 0) {
-//         const c = serial.read();
-//         if (c == YX5300.ResponseType.RESPONSE_START_BYTE) {
-//             startFound = true;
-//         } else if (startFound && c == YX5300.ResponseType.RESPONSE_VER_BYTE) {
-//             return;
-//         } else {
-//             startFound = false;
-//         }
-//     }
-//     basic.pause(200);
-// }
+
+namespace serial {
+
+    /**
+    * Returns the first byte from the RX buffer or -1 if no data is available.
+    */
+    //% shim=serial::read
+    export function read(): number { return -1 }
+
+
+    /**
+    * Returns the number of currently available bytes in the RX buffer.
+    */
+    //% shim=serial::available
+    export function available(): number { return 0 }
+}
+
+while (true) {
+    while (serial.available() > 0) {
+        const c = serial.read();
+    }
+    basic.pause(200);
+}
