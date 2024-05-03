@@ -4,6 +4,7 @@
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 
 namespace Blinkit_driver {
+    
     /**
      * BLINKIT initialize
      */
@@ -70,6 +71,23 @@ namespace Blinkit_driver {
         }
     }
 
+
+
+    /**
+            * Sensor driver blocks ???
+            * @param Sensor which Sensor to turn on
+            * @param dir which direction to go
+            * @param speed how fast
+            */
+    //% blockId=Sensor_value
+    //% block="获取%SensorName|%PosNum|数据"
+    export function Sensor(SensorName: SensorName, PosNum: PosNum): void {
+        SensorName = SensorName + 65;
+        const char = asciiToChar(SensorName);
+        let projectInfo = "7e4" + char + PosNum + "0#"
+        serial.writeString(projectInfo)
+        //serial.writeString("7e301#")
+    }
 
 
     function asciiToChar(asciiCode: number): string {
@@ -447,6 +465,14 @@ namespace Blinkit_driver {
     }
 
 
+
+
+
+
+
+
+
+
     /**
      * 
      */
@@ -484,11 +510,11 @@ namespace Blinkit_driver {
     //% weight=2
     //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
     export function ltEvent(SensorName: SensorName, PosNum: PosNum, xx: number, a: Action) {
-        SensorName = SensorName + 65;
-        const char = asciiToChar(SensorName);
-        let projectInfo = "7e4" + char + PosNum + "0#"
-        serial.writeString(projectInfo)
-        basic.pause(500)
+        // SensorName = SensorName + 65;
+        // const char = asciiToChar(SensorName);
+        // let projectInfo = "7e4" + char + PosNum + "0#"
+        // serial.writeString(projectInfo)
+        // basic.pause(500)
         let s = ""
         while (serial.available() > 0) {
             const c = serial.read()
@@ -504,10 +530,13 @@ namespace Blinkit_driver {
         serial.writeString(s2);
 
 
-        //serial.writeString("7e301#");
+        
     }
-
-
+basic.forever(() => {
+    //serial.writeString("7e301#");
+    //serial.writeString(s2);
+    basic.pause(3500);
+})
 
 }
 
@@ -517,7 +546,3 @@ namespace Blinkit_driver {
 //     version += String.fromCharCode(buf[index])
 // }
 
-// basic.forever(() => {
-
-//     basic.pause(50);
-// })
