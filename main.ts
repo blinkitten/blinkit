@@ -480,5 +480,20 @@ namespace Blinkit_driver {
         basic.pause(50);
     })
 
-
+    
 }
+
+
+// while (true) {
+//     while (serial.available() > 0) {
+//         const c = serial.read();
+//         if (c == YX5300.ResponseType.RESPONSE_START_BYTE) {
+//             startFound = true;
+//         } else if (startFound && c == YX5300.ResponseType.RESPONSE_VER_BYTE) {
+//             return;
+//         } else {
+//             startFound = false;
+//         }
+//     }
+//     basic.pause(200);
+// }
