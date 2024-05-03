@@ -456,8 +456,8 @@ namespace Blinkit_driver {
         SensorName = SensorName + 65;
         const char = asciiToChar(SensorName);
         let projectInfo = "7e4" + char + PosNum + "0#"
-        //serial.writeString(projectInfo);
-        serial.writeString("7e301#");
+        serial.writeString(projectInfo);
+        //serial.writeString("7e301#");
 
         // for (let index = 0; index < dataLen; index++) {
         //     version += String.fromCharCode(buf[index])
