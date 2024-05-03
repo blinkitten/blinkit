@@ -4,8 +4,6 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "microphone": "*"
         "serial-read": "github:philipphenkel/pxt-serial-read#v0.1.3"
     },
     "files": [
