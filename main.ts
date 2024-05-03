@@ -87,6 +87,17 @@ namespace Blinkit_driver {
         let projectInfo = "7e4" + char + PosNum + "0#"
         serial.writeString(projectInfo)
         //serial.writeString("7e301#")
+        basic.pause(200);
+        
+        let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
+        //basic.showString(s)
+        let Wv = 48 + 20 + 6;
+        let length: number = s.length + 53; //48+5
+        const char2 = asciiToChar(length);
+        const char3 = asciiToChar(Wv);
+        s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+        serial.writeString(s3);
+
     }
 
 
@@ -516,25 +527,26 @@ namespace Blinkit_driver {
         // let projectInfo = "7e4" + char + PosNum + "0#"
         // serial.writeString(projectInfo)
         // basic.pause(500)
-        let s = "1"
-        while (serial.available() > 0) {
-            const c = serial.read()
-            s += c
-            basic.pause(5)
-        }
-        let Wv = 48 + 20 + 4;
-        let length: number = s.length + 53; //48+5
-        const char2 = asciiToChar(length);
-        const char3 = asciiToChar(Wv);
-        s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+        
+        //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
+        //basic.showString(s)
+        // let Wv = 48 + 20 + 4;
+        // let length: number = s.length + 53; //48+5
+        // const char2 = asciiToChar(length);
+        // const char3 = asciiToChar(Wv);
+        // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
         //serial.writeString(s3);
     }
     basic.forever(() => {
         //serial.writeString("7e301#");
         //serial.writeString(s2);
-        serial.writeString(s3);
-        basic.pause(3500);
-    })
+        //serial.writeString(s3);
+        //basic.showIcon(IconNames.Heart)
+        basic.pause(500);
+        //basic.clearScreen()
+        basic.pause(2500);
+        //s3 = "";
+        })
 
 }
 
