@@ -456,14 +456,12 @@ namespace Blinkit_driver {
         SensorName = SensorName + 65;
         const char = asciiToChar(SensorName);
         let projectInfo = "7e4" + char + PosNum + "0#"
-        serial.writeString(projectInfo);
+        serial.writeString(projectInfo)
+        let projectInfo2 = "" 
+        basic.pause(100)
 
-
-        //serial.writeString("7e301#");
-
-        // for (let index = 0; index < dataLen; index++) {
-        //     version += String.fromCharCode(buf[index])
-        // }
+        
+        
         let version = 0;
         return version
     }
@@ -473,16 +471,26 @@ namespace Blinkit_driver {
     */
     //% weight=2
     //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
-    export function ltEvent(value: SensorName, vi: PosNum, xx: number, a: Action) {
-        let state = value + vi;
-        serial.writeNumber(state)
+    export function ltEvent(SensorName: SensorName, PosNum: PosNum, xx: number, a: Action) {
+        SensorName = SensorName + 65;
+        const char = asciiToChar(SensorName);
+        let projectInfo = "7e4" + char + PosNum + "0#"
+        serial.writeString(projectInfo)
+        basic.pause(500)
+        let projectInfo2 = ""
+        
+        while (serial.available() > 0) {
+            const c = serial.read()
+            projectInfo2 += c
+
+        }
+
+        //serial.writeString("7e301#");
     }
     basic.forever(() => {
 
         basic.pause(50);
     })
-
-    
 
 
 }
@@ -490,14 +498,11 @@ namespace Blinkit_driver {
 
 
 namespace serial {
-
     /**
     * Returns the first byte from the RX buffer or -1 if no data is available.
     */
     //% shim=serial::read
     export function read(): number { return -1 }
-
-
     /**
     * Returns the number of currently available bytes in the RX buffer.
     */
@@ -505,9 +510,20 @@ namespace serial {
     export function available(): number { return 0 }
 }
 
-while (true) {
-    while (serial.available() > 0) {
-        const c = serial.read();
-    }
-    basic.pause(200);
-}
+// while (true) {
+//     while (serial.available() > 0) {
+//         const c = serial.read();
+//     }
+//     basic.pause(200);
+// }
+
+
+// for (let index = 0; index < dataLen; index++) {
+//     version += String.fromCharCode(buf[index])
+// }
+
+// while (serial.available() > 0) {
+//     const c = serial.read()
+//     projectInfo2 += c
+//     basic.pause(2)
+// }
