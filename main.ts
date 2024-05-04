@@ -3,8 +3,15 @@
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 namespace Blinkit_driver {
-    let s3: string = "";
-    let blinkitten_sensor: number[][] = [[]];
+    let s3: string = ""
+    //let blinkitten_sensor = [20, 9]
+    let blinkitten_sensor: number[][] = [];
+    for (let i = 0; i < 20; i++) {
+        blinkitten_sensor[i] = [];
+        for (let j = 0; j < 9; j++) {
+            blinkitten_sensor[i][j] = 0;
+        }
+    }
     /**
      * BLINKIT initialize
      */
@@ -71,7 +78,33 @@ namespace Blinkit_driver {
         }
     }
 
-
+    /**
+            * Sensor driver blocks 
+            * @param Sensor which Sensor to turn on
+            * @param dir which direction to go
+            * @param speed how fast
+            */
+    //% blockId=Sensor_value_auto
+    //% block="启用blinkit传感器"
+    //获取传感器数值 存入数组中
+    export function Sensor_auto(): void {
+        let s: string = ""
+        s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
+        let length: number = s.length; 
+        //if (length > 3) {
+        if (s[2] == '=' ) {
+            let value_s: string = ""
+            for (let index = 3; index < length; index++) {  //A0=123
+                value_s += s[index]
+            }
+            let valus_n: number = +value_s;
+            let a: number = s.charCodeAt(0) - 65
+            let b: number = +s[1]
+            //if (a >= 0 && b >= 0) {
+            blinkitten_sensor[a][b] = valus_n
+            //}
+        }
+    }
 
     /**
             * Sensor driver blocks 
@@ -87,48 +120,26 @@ namespace Blinkit_driver {
         const char = asciiToChar(SensorName);
         let projectInfo = "7e4" + char + PosNum + "0#"
         serial.writeString(projectInfo)
-        //serial.writeString("7e301#")
-        basic.pause(10);
 
-        let s:string = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
-        //basic.showString(s)
-        // let Wv = 48 + 20 + 6;
-        // let length: number = s.length + 53; //48+5
-        // const char2 = asciiToChar(length);
-        // const char3 = asciiToChar(Wv);
-        // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
-        // serial.writeString(s3);
+        // let s:string ="" 
+        // s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
 
-        //let length: number = s.length ;
-        if (s.length>3)
-        {
-            let value_s: string = ""
-            for (let index = 3; index < s.length; index++) {  //A0=123
-                value_s += s[index]
-            }
-            //let valus_n: number = +value_s;
-            //let a: string = s[0]
-            //let b: string = s[1]
-            //let a: number = s.charCodeAt(0) - 65
-            //let b: number = +s[1]
-            blinkitten_sensor[s.charCodeAt(0) - 65][+s[1]] = +value_s
-            //basic.showNumber(valus_n)
-        }
 
-        //basic.showNumber(valus_n)
-        //basic.showString(value_s)
-
-        // value_s = asciiToChar(valus_n);
-        // let Wv = 48 + 20 + 6;
-        // length = value_s.length + 53; //48+5
-        // const char2 = asciiToChar(length);
-        // const char3 = asciiToChar(Wv);
-        
-        // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + value_s + "#";
-        // serial.writeString(s3);
-
-        //basic.showString(value_s)
-
+        // let length: number = s.length ;
+        // if (length>3)
+        // {
+        //     let value_s: string = ""
+        //     for (let index = 3; index < length; index++) {  //A0=123
+        //         value_s += s[index]
+        //     }
+        //     let valus_n: number = +value_s;
+        //     let a: number = s.charCodeAt(0) - 65
+        //     let b: number = +s[1]
+        //     if( a >= 0 && b >= 0 )
+        //     {
+        //         blinkitten_sensor[a][b] = valus_n
+        //     }
+        // }
     }
 
 
@@ -512,7 +523,14 @@ namespace Blinkit_driver {
     //% weight=10
     //% blockId=kb_event block="%SensorName|%PosNum|的数据"
     export function IR_read_version(SensorName: SensorName, PosNum: PosNum): number {
+        // if (blinkitten_sensor[SensorName][PosNum] == null)
+        // {
+        //     blinkitten_sensor[SensorName][PosNum] = 0
+        //     basic.showString("!")
+        // }
         return blinkitten_sensor[SensorName][PosNum]
+        
+        
     }
 
     /**
