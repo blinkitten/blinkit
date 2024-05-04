@@ -532,6 +532,7 @@ namespace Blinkit_driver {
         //     basic.showString("!")
         // }
         let num = blinkitten_sensor[SensorName][PosNum]
+        //let num2:number = 6
         return num
     }
 
