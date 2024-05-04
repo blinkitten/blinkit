@@ -90,9 +90,9 @@ namespace Blinkit_driver {
     export function Sensor_auto(): void {
         let s: string = ""
         s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
-        let length: number = s.length; 
+        let length: number = s.length;
         //if (length > 3) {
-        if (s[2] == '=' ) {
+        if (s[2] == '=') {
             let value_s: string = ""
             for (let index = 3; index < length; index++) {  //A0=123
                 value_s += s[index]
@@ -529,8 +529,8 @@ namespace Blinkit_driver {
         //     basic.showString("!")
         // }
         return blinkitten_sensor[SensorName][PosNum]
-        
-        
+
+
     }
 
     /**
@@ -538,14 +538,14 @@ namespace Blinkit_driver {
     */
     //% weight=2
     //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
-    
+
     export function ltEvent(SensorName: SensorName, PosNum: PosNum, xx: number, a: Action) {
         // SensorName = SensorName + 65;
         // const char = asciiToChar(SensorName);
         // let projectInfo = "7e4" + char + PosNum + "0#"
         // serial.writeString(projectInfo)
         // basic.pause(500)
-        
+
         //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
         //basic.showString(s)
         // let Wv = 48 + 20 + 4;
@@ -564,7 +564,7 @@ namespace Blinkit_driver {
         //basic.clearScreen()
         basic.pause(2500);
         //s3 = "";
-        })
+    })
 
 }
 
