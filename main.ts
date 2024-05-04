@@ -114,7 +114,7 @@ namespace Blinkit_driver {
             let a: number = s.charCodeAt(0) - 65
             let b: number = +s[1]
             blinkitten_sensor[a][b] = valus_n
-            basic.showNumber(valus_n)
+            //basic.showNumber(valus_n)
         }
 
         //basic.showNumber(valus_n)
@@ -508,44 +508,28 @@ namespace Blinkit_driver {
         serial.writeString(projectInfo);
     }
 
-
-
-
-
-
-    
-
-
-
     /**
      * 
      */
     //% weight=10
-    //% blockId=kb_event block="获取%SensorName|%PosNum|的数据"
-    export function IR_read_version(SensorName: SensorName, PosNum: PosNum): string {
-        SensorName = SensorName + 65;
-        const char = asciiToChar(SensorName);
-        let projectInfo = "7e4" + char + PosNum + "0#"
-        //serial.writeString(projectInfo)
-        serial.writeString("7e4A00#");
-        basic.pause(500)
-        let s: string = ""
-        while (serial.available() > 0) {
-            const c = serial.read()
-            s += c
-            basic.pause(5)
-        }
-        //let version = 0;
-        return s
-
+    //% blockId=kb_event block="%SensorName|%PosNum|的数据"
+    export function IR_read_version(SensorName: SensorName, PosNum: PosNum): number {
+        // SensorName = SensorName + 65;
+        // const char = asciiToChar(SensorName);
+        // let projectInfo = "7e4" + char + PosNum + "0#"
+        // //serial.writeString(projectInfo)
+        // serial.writeString("7e4A00#");
+        // basic.pause(500)
+        // let s: string = ""
         // let Wv = 48 + 20 + 4;
         // let length: number = s.length + 53; //48+5
         // const char2 = asciiToChar(length);
         // const char3 = asciiToChar(Wv);
         // let s2 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
         // serial.writeString(s2);
-
         // basic.pause(1000)
+        //basic.showNumber(blinkitten_sensor[SensorName][PosNum])
+        return blinkitten_sensor[SensorName][PosNum]
     }
 
     /**
@@ -589,3 +573,8 @@ namespace Blinkit_driver {
 //     version += String.fromCharCode(buf[index])
 // }
 
+// while (serial.available() > 0) {
+//     const c = serial.read()
+//     s += c
+//     basic.pause(5)
+// }
