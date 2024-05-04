@@ -90,8 +90,6 @@ namespace Blinkit_driver {
         //serial.writeString("7e301#")
         basic.pause(10);
 
-
-
         let s:string = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
         //basic.showString(s)
         // let Wv = 48 + 20 + 6;
@@ -101,19 +99,19 @@ namespace Blinkit_driver {
         // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
         // serial.writeString(s3);
 
-        let length: number = s.length ;
-        if(length>3)
+        //let length: number = s.length ;
+        if (s.length>3)
         {
             let value_s: string = ""
-            for (let index = 3; index < length; index++) {  //A0=123
+            for (let index = 3; index < s.length; index++) {  //A0=123
                 value_s += s[index]
             }
-            let valus_n: number = +value_s;
+            //let valus_n: number = +value_s;
             //let a: string = s[0]
             //let b: string = s[1]
-            let a: number = s.charCodeAt(0) - 65
-            let b: number = +s[1]
-            blinkitten_sensor[a][b] = valus_n
+            //let a: number = s.charCodeAt(0) - 65
+            //let b: number = +s[1]
+            blinkitten_sensor[s.charCodeAt(0) - 65][+s[1]] = +value_s
             //basic.showNumber(valus_n)
         }
 
@@ -514,21 +512,6 @@ namespace Blinkit_driver {
     //% weight=10
     //% blockId=kb_event block="%SensorName|%PosNum|的数据"
     export function IR_read_version(SensorName: SensorName, PosNum: PosNum): number {
-        // SensorName = SensorName + 65;
-        // const char = asciiToChar(SensorName);
-        // let projectInfo = "7e4" + char + PosNum + "0#"
-        // //serial.writeString(projectInfo)
-        // serial.writeString("7e4A00#");
-        // basic.pause(500)
-        // let s: string = ""
-        // let Wv = 48 + 20 + 4;
-        // let length: number = s.length + 53; //48+5
-        // const char2 = asciiToChar(length);
-        // const char3 = asciiToChar(Wv);
-        // let s2 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
-        // serial.writeString(s2);
-        // basic.pause(1000)
-        //basic.showNumber(blinkitten_sensor[SensorName][PosNum])
         return blinkitten_sensor[SensorName][PosNum]
     }
 
