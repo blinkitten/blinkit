@@ -529,8 +529,6 @@ namespace Blinkit_driver {
         //     basic.showString("!")
         // }
         return blinkitten_sensor[SensorName][PosNum]
-
-
     }
 
     /**
