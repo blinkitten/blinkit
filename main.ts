@@ -329,7 +329,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_String
-    //% block="Led_8x8%PosNum|显示字符串%s|动画%Dh|速度 %speed"
+    //% block="Led_8x8%PosNum|显示文本%s|动画%Dh|速度%speed"
     //% speed.min=1 speed.max=6
     export function Led8x8_1(PosNum: PosNum, s: string, Dh: Led8x8_DH2, speed: number): void {
         let Wv = 48 + Dh * 10 + speed;
@@ -369,7 +369,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_move
-    //% block="Led_8x8%PosNum|熄灭,坐标:|X:%L_l Y:%L_h|点亮,坐标:|X:%L_l2 Y:%L_h2"
+    //% block="Led_8x8%PosNum 熄灭|坐标X:%L_l坐标Y:%L_h|点亮|坐标X:%L_l2坐标Y:%L_h2"
     //% L_l.min=1 L_l.max=8
     //% L_h.min=1 L_h.max=8
     //% L_l2.min=1 L_l2.max=8
@@ -521,7 +521,7 @@ namespace Blinkit_driver {
      * 
      */
     //% weight=10
-    //% blockId=kb_event block="%SensorName|%PosNum|的数据"
+    //% blockId=kb_event block="%SensorName|%PosNum"
     export function IR_read_version(SensorName: SensorName, PosNum: PosNum): number {
         // if (blinkitten_sensor[SensorName][PosNum] == null)
         // {
