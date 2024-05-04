@@ -1,17 +1,19 @@
+let s3: string = ""
+//let blinkitten_sensor = [20, 9]
+let blinkitten_sensor: number[][] = [];
+for (let i = 0; i < 20; i++) {
+    blinkitten_sensor[i] = [];
+    for (let j = 0; j < 9; j++) {
+        blinkitten_sensor[i][j] = 0;
+    }
+}
+
 /**
  * Blocks for Blinkit Board
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 namespace Blinkit_driver {
-    let s3: string = ""
-    //let blinkitten_sensor = [20, 9]
-    let blinkitten_sensor: number[][] = [];
-    for (let i = 0; i < 20; i++) {
-        blinkitten_sensor[i] = [];
-        for (let j = 0; j < 9; j++) {
-            blinkitten_sensor[i][j] = 0;
-        }
-    }
+    
     /**
      * BLINKIT initialize
      */
@@ -88,7 +90,7 @@ namespace Blinkit_driver {
     //% block="启用blinkit传感器"
     //获取传感器数值 存入数组中
     export function Sensor_auto(): void {
-        let s: string = ""
+        let s: string 
         s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
         let length: number = s.length;
         //if (length > 3) {
@@ -103,6 +105,7 @@ namespace Blinkit_driver {
             //if (a >= 0 && b >= 0) {
             blinkitten_sensor[a][b] = valus_n
             //}
+            s = ""
         }
     }
 
@@ -528,7 +531,8 @@ namespace Blinkit_driver {
         //     blinkitten_sensor[SensorName][PosNum] = 0
         //     basic.showString("!")
         // }
-        return blinkitten_sensor[SensorName][PosNum]
+        let num = blinkitten_sensor[SensorName][PosNum]
+        return num
     }
 
     /**
