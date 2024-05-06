@@ -94,10 +94,12 @@ namespace Blinkit_driver {
             let s: string = ""
             while (c != 10) {
                 s = s + asciiToChar(c)
+                basic.pause(3)
                 c = serial.read();
-                basic.pause(2)
             }
-            //
+            basic.showString(s)
+            basic.pause(150)
+            basic.clearScreen()
             //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123     
             // let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
             if (s != "") {
