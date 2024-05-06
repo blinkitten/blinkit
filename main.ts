@@ -121,7 +121,6 @@ namespace Blinkit_driver {
                     }
                 }
             }
-
             //basic.pause(10);
         }       
     }
