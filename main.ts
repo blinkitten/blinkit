@@ -3,8 +3,7 @@
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 namespace Blinkit_driver {
-    let s: string 
-    //let blinkitten_sensor = [20, 9]
+    let s3: string
     let blinkitten_sensor: number[][] = [];
     for (let i = 0; i < 20; i++) {
         blinkitten_sensor[i] = [];
@@ -86,28 +85,43 @@ namespace Blinkit_driver {
             * @param speed how fast
             */
     //% blockId=Sensor_value_auto
-    //% block="启用blinkit传感器2"
+    //% block="启用blinkit传感器"
     export function normal3(): void {
         //let s: string
-        s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
-        //serial.readUntil(serial.delimiters(Delimiters.NewLine))
-        if(s != "")
+        let c = serial.read();
+        if(c!=-1)
         {
-            let length: number = s.length;
-            if (length > 3 && s[2] == "=") {
-                let value_s: string = ""
-                for (let index = 3; index < length; index++) {  //A0=123
-                    value_s += s[index]
-                }
-                let value_n: number = +value_s;
-                let a: number = s.charCodeAt(0) - 65
-                let b: number = +s[1]
-                if (a >= 0 && b >= 0 && value_n >= 0) {
-                    blinkitten_sensor[a][b] = value_n
+            let s: string = ""
+            while (c != 10) {
+                s = s + asciiToChar(c)
+                c = serial.read();
+                basic.pause(2)
+            }
+            //
+            //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123     
+            // let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
+            if (s != "") {
+                let length: number = s.length;
+                if (length > 3 && s[2] == "=") {
+                    let value_s: string = ""
+                    for (let index = 3; index < length; index++) {  //A0=1 23
+                        value_s += s[index]
+                    }
+                    let value_n: number = +value_s;
+                    // basic.showNumber(value_n)
+                    // basic.pause(150)
+                    // basic.clearScreen()
+                    let a: number = s.charCodeAt(0) - 65
+                    let b: number = +s[1]
+                    if (a >= 0 && b >= 0 && value_n >= 0) {
+                        blinkitten_sensor[a][b] = value_n
+
+                    }
                 }
             }
-        }
-        basic.pause(10);
+
+            //basic.pause(10);
+        }       
     }
 
     /**
@@ -524,8 +538,8 @@ namespace Blinkit_driver {
     //% weight=10
     //% blockId=kb_event block="%SensorName|%PosNum"
     export function ping(SensorName: SensorName, PosNum: PosNum): number {
-        let valus_n = blinkitten_sensor[SensorName][PosNum]
-        return valus_n
+        let value_n = blinkitten_sensor[SensorName][PosNum]
+        return value_n
     }
 
     /**
@@ -535,30 +549,30 @@ namespace Blinkit_driver {
     //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
 
     //export function ltEvent(SensorName: SensorName, PosNum: PosNum, xx: number, a: Action) {
-        // SensorName = SensorName + 65;
-        // const char = asciiToChar(SensorName);
-        // let projectInfo = "7e4" + char + PosNum + "0#"
-        // serial.writeString(projectInfo)
-        // basic.pause(500)
+    // SensorName = SensorName + 65;
+    // const char = asciiToChar(SensorName);
+    // let projectInfo = "7e4" + char + PosNum + "0#"
+    // serial.writeString(projectInfo)
+    // basic.pause(500)
 
-        //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
-        //basic.showString(s)
-        // let Wv = 48 + 20 + 4;
-        // let length: number = s.length + 53; //48+5
-        // const char2 = asciiToChar(length);
-        // const char3 = asciiToChar(Wv);
-        // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
-        //serial.writeString(s3);
+    //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
+    //basic.showString(s)
+    // let Wv = 48 + 20 + 4;
+    // let length: number = s.length + 53; //48+5
+    // const char2 = asciiToChar(length);
+    // const char3 = asciiToChar(Wv);
+    // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+    //serial.writeString(s3);
     //}
     //basic.forever(() => {
-        //serial.writeString("7e301#");
-        //serial.writeString(s2);
-        //serial.writeString(s3);
-        //basic.showIcon(IconNames.Heart)
-        //basic.pause(500);
-        //basic.clearScreen()
-        //basic.pause(2500);
-        //s3 = "";
+    //serial.writeString("7e301#");
+    //serial.writeString(s2);
+    //serial.writeString(s3);
+    //basic.showIcon(IconNames.Heart)
+    //basic.pause(500);
+    //basic.clearScreen()
+    //basic.pause(2500);
+    //s3 = "";
     //})
 
 
