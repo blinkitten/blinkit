@@ -1,18 +1,17 @@
-let s3: string = ""
-//let blinkitten_sensor = [20, 9]
-let blinkitten_sensor: number[][] = [];
-for (let i = 0; i < 20; i++) {
-    blinkitten_sensor[i] = [];
-    for (let j = 0; j < 9; j++) {
-        blinkitten_sensor[i][j] = 0;
-    }
-} 
-
 /**
  * Blocks for Blinkit Board
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 namespace Blinkit_driver {
+    let s3: string = ""
+    //let blinkitten_sensor = [20, 9]
+    let blinkitten_sensor: number[][] = [];
+    for (let i = 0; i < 20; i++) {
+        blinkitten_sensor[i] = [];
+        for (let j = 0; j < 9; j++) {
+            blinkitten_sensor[i][j] = 0;
+        }
+    }
     /**
      * BLINKIT initialize
      */
@@ -89,7 +88,7 @@ namespace Blinkit_driver {
     //% block="启用blinkit传感器"
     //获取传感器数值 存入数组中
     export function Sensor_auto(): void {
-        let s: string 
+        let s: string = ""
         s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
         let length: number = s.length;
         //if (length > 3) {
@@ -104,15 +103,7 @@ namespace Blinkit_driver {
             //if (a >= 0 && b >= 0) {
             blinkitten_sensor[a][b] = valus_n
             //}
-            
-            // basic.showNumber(a)
-            // basic.pause(50);
-            // basic.showNumber(b)
-            // basic.pause(50);
-            // basic.clearScreen()
-            // basic.pause(50);
         }
-        s = ""
     }
 
     /**
@@ -530,49 +521,50 @@ namespace Blinkit_driver {
      * 
      */
     //% weight=10
-    //% blockId=Sensor_read="%SensorName|%PosNum"
-    export function Sensor_read(SensorName: SensorName, PosNum: PosNum): number {
-        let num = blinkitten_sensor[SensorName][PosNum]
-        //let num2:number = 6
-        // basic.showNumber(num)
-        // basic.pause(50);
-        // basic.clearScreen()
-        // basic.pause(50);
-        return num
+    //% blockId=kb_event block="%SensorName|%PosNum"
+    export function IR_read_version(SensorName: SensorName, PosNum: PosNum): number {
+        // if (blinkitten_sensor[SensorName][PosNum] == null)
+        // {
+        //     blinkitten_sensor[SensorName][PosNum] = 0
+        //     basic.showString("!")
+        // }
+        return blinkitten_sensor[SensorName][PosNum]
+
+
     }
 
-    // /**
-    // * Line tracking sensor event function
-    // */
-    // //% weight=2
-    // //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
-    // export function ltEvent(SensorName: SensorName, PosNum: PosNum, xx: number, a: Action) {
-    //     // SensorName = SensorName + 65;
-    //     // const char = asciiToChar(SensorName);
-    //     // let projectInfo = "7e4" + char + PosNum + "0#"
-    //     // serial.writeString(projectInfo)
-    //     // basic.pause(500)
+    /**
+    * Line tracking sensor event function
+    */
+    //% weight=2
+    //% blockId=1234_event block="如果%value|%vi|数值 > %xx "
 
-    //     //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
-    //     //basic.showString(s)
-    //     // let Wv = 48 + 20 + 4;
-    //     // let length: number = s.length + 53; //48+5
-    //     // const char2 = asciiToChar(length);
-    //     // const char3 = asciiToChar(Wv);
-    //     // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
-    //     //serial.writeString(s3);
-    // }
+    export function ltEvent(SensorName: SensorName, PosNum: PosNum, xx: number, a: Action) {
+        // SensorName = SensorName + 65;
+        // const char = asciiToChar(SensorName);
+        // let projectInfo = "7e4" + char + PosNum + "0#"
+        // serial.writeString(projectInfo)
+        // basic.pause(500)
 
-    // basic.forever(() => {
-    //     //serial.writeString("7e301#");
-    //     //serial.writeString(s2);
-    //     //serial.writeString(s3);
-    //     //basic.showIcon(IconNames.Heart)
-    //     basic.pause(500);
-    //     //basic.clearScreen()
-    //     basic.pause(2500);
-    //     //s3 = "";
-    // })
+        //let s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车
+        //basic.showString(s)
+        // let Wv = 48 + 20 + 4;
+        // let length: number = s.length + 53; //48+5
+        // const char2 = asciiToChar(length);
+        // const char3 = asciiToChar(Wv);
+        // s3 = "7e" + char2 + "d" + PosNum + 1 + char3 + s + "#";
+        //serial.writeString(s3);
+    }
+    basic.forever(() => {
+        //serial.writeString("7e301#");
+        //serial.writeString(s2);
+        //serial.writeString(s3);
+        //basic.showIcon(IconNames.Heart)
+        basic.pause(500);
+        //basic.clearScreen()
+        basic.pause(2500);
+        //s3 = "";
+    })
 
 }
 
