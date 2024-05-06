@@ -3,7 +3,7 @@
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
 namespace Blinkit_driver {
-    let s3: string = ""
+    let s: string 
     //let blinkitten_sensor = [20, 9]
     let blinkitten_sensor: number[][] = [];
     for (let i = 0; i < 20; i++) {
@@ -12,7 +12,7 @@ namespace Blinkit_driver {
             blinkitten_sensor[i][j] = 0;
         }
     }
-    //blinkitten_sensor[1][0] = 4
+
     /**
      * BLINKIT initialize
      */
@@ -86,32 +86,28 @@ namespace Blinkit_driver {
             * @param speed how fast
             */
     //% blockId=Sensor_value_auto
-    //% block="启用blinkit传感器"
-    export function Sensor_auto(): void {
-        //basic.showNumber(serial.available());
-        // if (serial.available() > 0)
-        // {
-        let s: string = ""
+    //% block="启用blinkit传感器2"
+    export function normal3(): void {
+        //let s: string
         s = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
-        let length: number = s.length;
-
-        //if (length > 3) {
-        //basic.showNumber(length);
-        if (length > 3 && s[2] == "=") {
-            let value_s: string = ""
-            for (let index = 3; index < length; index++) {  //A0=123
-                value_s += s[index]
-            }
-            let valus_n: number = +value_s;
-            let a: number = s.charCodeAt(0) - 65
-            let b: number = +s[1]
-            if (a >= 0 && b >= 0 && valus_n >= 0) {
-                blinkitten_sensor[a][b] = valus_n
-                //blinkitten_sensor[a][b] = 4
+        //serial.readUntil(serial.delimiters(Delimiters.NewLine))
+        if(s != "")
+        {
+            let length: number = s.length;
+            if (length > 3 && s[2] == "=") {
+                let value_s: string = ""
+                for (let index = 3; index < length; index++) {  //A0=123
+                    value_s += s[index]
+                }
+                let value_n: number = +value_s;
+                let a: number = s.charCodeAt(0) - 65
+                let b: number = +s[1]
+                if (a >= 0 && b >= 0 && value_n >= 0) {
+                    blinkitten_sensor[a][b] = value_n
+                }
             }
         }
-        //}
-        
+        basic.pause(10);
     }
 
     /**
