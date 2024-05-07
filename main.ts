@@ -443,7 +443,7 @@ namespace Blinkit_driver {
         */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_String_play
-    //% block="Led_8x8%PosNum 显示图像, 动画%Dh"
+    //% block="Led_8x8%PosNum显示图像, 动画%Dh"
     export function Led8x8_6(PosNum: PosNum, Dh: Led8x8_DH): void {
         // let Wv = 48 + Dh * 10 + speed;
         // let length: number = s.length + 53; //48+5
