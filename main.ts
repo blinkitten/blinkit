@@ -329,7 +329,7 @@ namespace Blinkit_driver {
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_off
-    //% block="Led_8x8%PosNum|,清空屏幕, 动画%Dh"
+    //% block="Led_8x8%PosNum| 清空屏幕, 动画%Dh"
     export function Led8x8(PosNum: PosNum, Dh: Led8x8_DH): void {
         let projectInfo = "7e5d" + PosNum + "0" + Dh + "#"
         serial.writeString(projectInfo);
@@ -405,13 +405,13 @@ namespace Blinkit_driver {
     * @param Led8x8 which Led8x8 to turn on
     * @param dir which direction to go
     * @param speed how fast
-    * @param s is the text will be show, eg: 'Hello!'
+    * @param s is the text will be show, eg: '10101010'
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_matrix
     //% block="Led_8x8 第%Dh行|显示%s"
     //% speed.min=1 speed.max=6
-    export function Led8x8_5( s: string, Dh: Outmode): void {
+    export function Led8x8_5(Dh: Outmode , s: string): void {
         let yas;
         let temp = 0;
         let nn:number = 0 ;
@@ -437,15 +437,13 @@ namespace Blinkit_driver {
 
     /**
         * Led8x8 driver blocks    ok
-        
         * @param Led8x8 which Led8x8 to turn on
         * @param dir which direction to go
         * @param speed how fast
-        * @param s is the text will be show, eg: 'Hello!'
         */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_String_play
-    //% block="Led_8x8%PosNum|显示图像，动画%Dh"
+    //% block="Led_8x8%PosNum 显示图像, 动画%Dh"
     export function Led8x8_6(PosNum: PosNum, Dh: Led8x8_DH): void {
         // let Wv = 48 + Dh * 10 + speed;
         // let length: number = s.length + 53; //48+5
@@ -456,7 +454,7 @@ namespace Blinkit_driver {
 
         let projectInfo = "7eEd" + PosNum + 2 + Dh + Led8x8_matrix[0] + Led8x8_matrix[1] + Led8x8_matrix[2] + Led8x8_matrix[3] + Led8x8_matrix[4] + Led8x8_matrix[5] + Led8x8_matrix[6] + Led8x8_matrix[7] + "#";
         serial.writeString(projectInfo);
-        basic.showString(projectInfo)
+        //basic.showString(projectInfo)
     }
 
 
