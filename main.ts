@@ -85,7 +85,7 @@ namespace Blinkit_driver {
             * @param speed how fast
             */
     //% blockId=Sensor_value_auto
-    //% block="读取blinkit传感器状态"
+    //% block="更新blinkit传感器状态"
     export function normal3(): void {
         //let s: string
         let c = serial.read();
