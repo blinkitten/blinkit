@@ -1,7 +1,7 @@
 /**
  * Blocks for Blinkit Board
  */
-//% weight=100 color=#0855AA icon="\uf0ca" block="Blinkit"
+//% weight=100 color=#0855AA icon="\uf0ca" block="BLINKIT"
 namespace Blinkit_driver {
     //let s3: string
     let blinkitten_sensor: number[][] = [];
