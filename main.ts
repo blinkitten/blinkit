@@ -44,7 +44,7 @@ enum Sensor {
     //% block="Gesture"
     Gesture,
 }
-enum Outunit  {
+enum Outunit {
     //% block="All"
     All,
     //% block="舵机"
@@ -174,7 +174,6 @@ namespace Blinkit {
     /**
     * normal2 driver blocks  ok
     * @param normal2 which normal2 to turn on
-    * @param dir which direction to go
     */
     //% blockId=normal2
     //% block="指定%OutmodeName|Direct Drive %Sc"
@@ -228,7 +227,6 @@ namespace Blinkit {
     /**
             * Sensor driver blocks 
             * @param Sensor which Sensor to turn on
-            * @param dir which direction to go
             * @param speed how fast
             */
     //% blockId=Sensor_value_auto
@@ -274,8 +272,6 @@ namespace Blinkit {
     /**
             * Sensor driver blocks 
             * @param Sensor which Sensor to turn on
-            * @param dir which direction to go
-            * @param speed how fast
             */
     //% blockId=Sensor_value
     //% block="获取%SensorName|%PosNum|数据"
@@ -314,8 +310,6 @@ namespace Blinkit {
     /**
     * Led8x8 driver blocks   ok
     * @param Led8x8 which Led8x8 to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_off
@@ -329,8 +323,6 @@ namespace Blinkit {
     * Led8x8 driver blocks    ok
     
     * @param Led8x8 which Led8x8 to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     * @param s is the text will be show, eg: 'Hello!'
     * @param speed is the number will be show, eg: 1
     */
@@ -351,8 +343,6 @@ namespace Blinkit {
     * Led8x8 driver blocks    ok
     
     * @param Led8x8 which Led8x8 to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     * @param L is the number will be show, eg: 1
     * @param H is the number will be show, eg: 1
     */
@@ -371,8 +361,6 @@ namespace Blinkit {
     /**
     * Led8x8 driver blocks    ok  
     * @param Led8x8 which Led8x8 to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     * @param L1 is the number will be show, eg: 1
     * @param H1 is the number will be show, eg: 1
     * @param L2 is the number will be show, eg: 1
@@ -398,12 +386,14 @@ namespace Blinkit {
     * Led8x8 driver blocks    ok
     
     * @param Led8x8 which Led8x8 to turn on
+    * @param Dh is the number will be show, eg: 1
     * @param s is the text will be show, eg: '10101010'
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_matrix
     //% block="Led_8x8 行%Dh|显示%s"
-    export function Led8x8_5(Dh: OutEvent , s: string): void {
+    //% Dh.min=1 Dh.max=8
+    export function Led8x8_5(Dh: number , s: string): void {
         let yas;
         let temp = 0;
         let nn:number = 0 ;
@@ -430,8 +420,6 @@ namespace Blinkit {
     /**
         * Led8x8 driver blocks    ok
         * @param Led8x8 which Led8x8 to turn on
-        * @param dir which direction to go
-        * @param speed how fast
         */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_String_play
@@ -444,8 +432,6 @@ namespace Blinkit {
     /**
     * LedRGB driver blocks
     * @param LedRGB which Led8x8 to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     */
     //% subcategory="Led_RGB"
     //% blockId=Led_RGB
@@ -472,8 +458,6 @@ namespace Blinkit {
     /**
     * Player driver blocks   ok!
     * @param Player which Player to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     */
     //% subcategory="Player"
     //% blockId=Player
@@ -486,8 +470,6 @@ namespace Blinkit {
     /**
     * Player driver blocks   ok!
     * @param Player which Player to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     */
     //% subcategory="Player"
     //% blockId=Player_2
@@ -503,8 +485,6 @@ namespace Blinkit {
     /**
 * Player driver blocks   ok!
 * @param Player which Led8x8 to turn on
-* @param dir which direction to go
-* @param speed how fast
 * @param Xq is the number will be show, eg: 1
 */
     //% subcategory="Player"
@@ -522,7 +502,6 @@ namespace Blinkit {
         * Servo driver blocks   ok!
         
         * @param Servo_1 which Servo_1 to turn on
-        * @param dir which direction to go
         * @param speed how fast
         */
     //% subcategory="Servo"
@@ -541,7 +520,6 @@ namespace Blinkit {
     /**
     * Servo driver blocks   ok!
     * @param Servo which Servo to turn on
-    * @param dir which direction to go
     * @param speed how fast
     */
     //% subcategory="Servo"
@@ -561,7 +539,6 @@ namespace Blinkit {
         * Motorx1 driver blocks    !ok!
         
         * @param Motorx1 which Motorx1 to turn on
-        * @param dir which direction to go
         * @param speed how fast
         */
     //% subcategory="Motor"
