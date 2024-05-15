@@ -373,10 +373,10 @@ namespace Blinkit {
     * @param Led8x8 which Led8x8 to turn on
     * @param dir which direction to go
     * @param speed how fast
-    * @param L_l is the number will be show, eg: 1
-    * @param L_h is the number will be show, eg: 1
-    * @param L_l2 is the number will be show, eg: 1
-    * @param L_h2 is the number will be show, eg: 1
+    * @param Ll is the number will be show, eg: 1
+    * @param H1 is the number will be show, eg: 1
+    * @param L2 is the number will be show, eg: 1
+    * @param H2 is the number will be show, eg: 1
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_move
@@ -398,14 +398,11 @@ namespace Blinkit {
     * Led8x8 driver blocks    ok
     
     * @param Led8x8 which Led8x8 to turn on
-    * @param dir which direction to go
-    * @param speed how fast
     * @param s is the text will be show, eg: '10101010'
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_matrix
     //% block="Led_8x8 行%Dh|显示%s"
-    //% speed.min=1 speed.max=6
     export function Led8x8_5(Dh: OutEvent , s: string): void {
         let yas;
         let temp = 0;
