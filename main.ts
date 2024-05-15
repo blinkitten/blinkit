@@ -1,8 +1,158 @@
+enum Num {
+    //% block="1"
+    P1,
+    //% block="2"
+    P2,
+    //% block="3"
+    P3,
+    //% block="4"
+    P4,
+    //% block="5"
+    P5,
+    //% block="6"
+    P6,
+    //% block="7"
+    P7,
+    //% block="8"
+    P8,
+    //% block="9"
+    P9,
+}
+enum Sensor {
+    //% block="Light"
+    Light,
+    //% block="Click"
+    Click,
+    //% block="Joystick"
+    Joystick,
+    //% block="Angle"
+    Angle,
+    //% block="Push"
+    Push,
+    //% block="ASR"
+    ASR,
+    //% block="Title"
+    Title,
+    //% block="Touch"
+    Touch,
+    //% block="TEMP&HUM"
+    TEMPHUM,
+    //% block="Distance"
+    Distance,
+    //% block="Soil Moisture"
+    SoilMoisture,
+    //% block="Gesture"
+    Gesture,
+}
+enum Outunit  {
+    //% block="All"
+    All,
+    //% block="舵机"
+    Servo,
+    //% block="直流电机"
+    Motor,
+    //% block="双路直流电机"
+    Motorx2,
+    //% block="Led8x8"
+    Led8x8,
+    //% block="LED_RGB"
+    LedRGB,
+    //% block="Mp3"
+    Mp3,
+}
+enum OutEvent {
+    //% block="1"
+    Event1,
+    //% block="2"
+    Event2,
+    //% block="3"
+    Event3,
+    //% block="4"
+    Event4,
+    //% block="5"
+    Event5,
+    //% block="6"
+    Event6,
+    //% block="7"
+    Event7,
+    //% block="8"
+    Event8,
+
+}
+enum Led8x8Dh3 {
+    //% block="熄灭"
+    Off,
+    //% block="点亮"
+    On,
+}
+
+enum Led8x8Dh {
+    //% block="随机"
+    DH1,
+    //% block="环绕"
+    DH2,
+    //% block="折弯"
+    DH3,
+    //% block="扫描"
+    DH4,
+    //% block="直接"
+    DH5,
+}
+
+enum Led8x8Dh2 {
+    //% block="向左"
+    Left,
+    //% block="向右"
+    Right,
+    //% block="变化"
+    Change,
+}
+
+
+enum LedRGBDh {
+    //% block="无"
+    Wu,
+    //% block="渐变"
+    Change,
+}
+
+enum Mp3Dh {
+    //% block="暂停"
+    Dh0,
+    //% block="播放"
+    Dh1,
+    //% block="下一曲"
+    Dh2,
+    //% block="上一曲"
+    Dh3,
+    //% block="Vol+"
+    Dh4,
+    //% block="Vol-"
+    Dh5,
+    //% block="OneStop"
+    Dh6,
+    //% block="单曲循环"
+    Dh7,
+    //% block="全局播放"
+    Dh8,
+    //% block="随机播放"
+    Dh9,
+}
+
+enum MotorDh {
+    //% block="正转"
+    Right,
+    //% block="反转"
+    Left,
+}
+
+
+
 /**
  * Blocks for Blinkit Board
  */
 //% weight=100 color=#0855AA icon="\uf0ca" block="BLINKIT"
-namespace Blinkit_driver {
+namespace Blinkit {
     //let s3: string
     let blinkitten_sensor: number[][] = [];
     for (let i = 0; i < 20; i++) {
@@ -36,7 +186,7 @@ namespace Blinkit_driver {
     //% blockId=normal2
     //% block="指定%OutmodeName|Direct Drive %Sc"
     //% Sc.min=0 Sc.max=180
-    export function normal2(OutmodeName: OutmodeName, Sc: number): void {
+    export function normal2(OutmodeName: Outunit, Sc: number): void {
         if (OutmodeName == 0) {
             const OutValue = Sc / 10 + 48; // ASCII码对应
             Sc = Sc % 10;
@@ -63,7 +213,7 @@ namespace Blinkit_driver {
     */
     //% blockId=normal
     //% block="指定%OutmodeName|触发 %Outmode"
-    export function normal(OutmodeName: OutmodeName, Outmode: Outmode): void {
+    export function normal(OutmodeName: Outunit, Outmode: OutEvent): void {
         if (OutmodeName == 0) {
             Outmode = Outmode + 1; // ASCII码对应
             let projectInfo = "7e30" + Outmode + "#";
@@ -86,7 +236,7 @@ namespace Blinkit_driver {
             */
     //% blockId=Sensor_value_auto
     //% block="更新BLINKIT传感器状态"
-    export function normal3(): void {
+    export function Sensor_refresh(): void {
         //let s: string
         let c = serial.read();
         if(c!=-1)
@@ -134,7 +284,7 @@ namespace Blinkit_driver {
     //% blockId=Sensor_value
     //% block="获取%SensorName|%PosNum|数据"
     //获取传感器数值 存入数组中
-    export function Sensor(SensorName: SensorName, PosNum: PosNum): void {
+    export function Sensor_re(SensorName: Sensor, PosNum: Num): void {
         SensorName = SensorName + 65;
         const char = asciiToChar(SensorName);
         let projectInfo = "7e4" + char + PosNum + "0#"
@@ -159,167 +309,15 @@ namespace Blinkit_driver {
     }
 
 
+
+
     function asciiToChar(asciiCode: number): string {
         // 使用String.fromCharCode方法将ASCII码转换为字符  
         return String.fromCharCode(asciiCode);
     }
 
-    export enum SensorName {
-        //% block="Light"
-        Sensor0,
-        //% block="Click"
-        Sensor1,
-        //% block="joystick"
-        Sensor2,
-        //% block="Angle"
-        Sensor3,
-        //% block="Push"
-        Sensor4,
-        //% block="ASR"
-        Sensor5,
-        //% block="Title"
-        Sensor6,
-        //% block="Touch"
-        Sensor7,
-        //% block="TEMP&HUM"
-        Sensor8,
-        //% block="Distance"
-        Sensor9,
-        //% block="Soil Moisture"
-        Sensor10,
-        //% block="Gesture"
-        Sensor11,
-    }
 
-    export enum OutmodeName {
-        //% block="All"
-        Outmode0,
-        //% block="舵机"
-        Outmode1,
-        //% block="直流电机"
-        Outmode2,
-        //% block="双路直流电机"
-        Outmode3,
-        //% block="Led8x8"
-        Outmode4,
-        //% block="LED_RGB"
-        Outmode5,
-        //% block="Mp3"
-        Outmode6,
-    }
-    export enum Outmode {
-        //% block="1"
-        Outmode0,
-        //% block="2"
-        Outmode1,
-        //% block="3"
-        Outmode2,
-        //% block="4"
-        Outmode3,
-        //% block="5"
-        Outmode4,
-        //% block="6"
-        Outmode5,
-        //% block="7"
-        Outmode6,
-        //% block="8"
-        Outmode7,
 
-    }
-    export enum Led8x8_DH3 {
-        //% block="熄灭"
-        Off,
-        //% block="点亮"
-        On,
-    }
-
-    export enum Led8x8_DH2 {
-        //% block="向左"
-        Left,
-        //% block="向右"
-        Right,
-        //% block="变化"
-        Change,
-    }
-
-    export enum Led8x8_DH {
-        //% block="随机"
-        DH2_1,
-        //% block="环绕"
-        DH2_2,
-        //% block="折弯"
-        DH2_3,
-        //% block="扫描"
-        DH2_4,
-        //% block="直接"
-        DH2_5,
-    }
-    export enum LedRGB_DH {
-        //% block="无"
-        Wu,
-        //% block="渐变"
-        Change,
-    }
-
-    export enum Mp3_DH {
-        //% block="暂停"
-        Mp3_DH0,
-        //% block="播放"
-        Mp3_DH1,
-        //% block="下一曲"
-        Mp3_DH2,
-        //% block="上一曲"
-        Mp3_DH3,
-        //% block="Vol+"
-        Mp3_DH4,
-        //% block="Vol-"
-        Mp3_DH5,
-        //% block="OneStop"
-        Mp3_DH6,
-        //% block="单曲循环"
-        Mp3_DH7,
-        //% block="全局播放"
-        Mp3_DH8,
-        //% block="随机播放"
-        Mp3_DH9,
-    }
-
-    export enum Motor_DH {
-        //% block="正转"
-        Right,
-        //% block="反转"
-        Left,
-    }
-
-    export enum PosNum {
-        //%blockId=Led8x8_1
-        //% block="1"
-        PosNum1,
-        //%blockId=Led8x8_2
-        //% block="2"
-        PosNum2,
-        //%blockId=Led8x8_3
-        //% block="3"
-        PosNum3,
-        //%blockId=Led8x8_4
-        //% block="4"
-        PosNum4,
-        //%blockId=Led8x8_5
-        //% block="5"
-        PosNum5,
-        //%blockId=Led8x8_6
-        //% block="6"
-        PosNum6,
-        //%blockId=Led8x8_7
-        //% block="7"
-        PosNum7,
-        //%blockId=Led8x8_8
-        //% block="8"
-        PosNum8,
-        //%blockId=Led8x8_9
-        //% block="9"
-        PosNum9,
-    }
 
     /**
     * Led8x8 driver blocks   ok
@@ -330,7 +328,7 @@ namespace Blinkit_driver {
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_off
     //% block="Led_8x8%PosNum| 清空屏幕, 动画%Dh"
-    export function Led8x8(PosNum: PosNum, Dh: Led8x8_DH): void {
+    export function Led8x8(PosNum: Num, Dh: Led8x8Dh): void {
         let projectInfo = "7e5d" + PosNum + "0" + Dh + "#"
         serial.writeString(projectInfo);
     }
@@ -347,7 +345,7 @@ namespace Blinkit_driver {
     //% blockId=Led8x8_String
     //% block="Led_8x8%PosNum|显示文本%s|动画%Dh|速度%speed"
     //% speed.min=1 speed.max=6
-    export function Led8x8_1(PosNum: PosNum, s: string, Dh: Led8x8_DH2, speed: number): void {
+    export function Led8x8_1(PosNum: Num, s: string, Dh: Led8x8Dh2, speed: number): void {
         let Wv = 48 + Dh * 10 + speed;
         let length: number = s.length + 53; //48+5
         const char = asciiToChar(length);
@@ -369,7 +367,7 @@ namespace Blinkit_driver {
     //% block="Led_8x8%PosNum|坐标X:%L_l|坐标Y:%L_h|%Dh"
     //% L_l.min=1 L_l.max=8
     //% L_h.min=1 L_h.max=8
-    export function Led8x8_3(PosNum: PosNum, L_l: number, L_h: number, Dh: Led8x8_DH3): void {
+    export function Led8x8_3(PosNum: Num, L_l: number, L_h: number, Dh: Led8x8Dh3): void {
         let L_n = L_l + L_h * 8 - 9 + 48;
         const char = asciiToChar(L_n);
         let projectInfo = "7e6d" + PosNum + "3" + Dh + char + "#";
@@ -390,7 +388,7 @@ namespace Blinkit_driver {
     //% L_h.min=1 L_h.max=8
     //% L_l2.min=1 L_l2.max=8
     //% L_h2.min=1 L_h2.max=8
-    export function Led8x8_4(PosNum: PosNum, L_l: number, L_h: number, L_l2: number, L_h2: number): void {
+    export function Led8x8_4(PosNum: Num, L_l: number, L_h: number, L_l2: number, L_h2: number): void {
         let L_n = L_l + L_h * 8 - 9 + 48;
         let L_n2 = L_l2 + L_h2 * 8 - 9 + 48;
         const char = asciiToChar(L_n);
@@ -411,7 +409,7 @@ namespace Blinkit_driver {
     //% blockId=Led8x8_matrix
     //% block="Led_8x8 第%Dh行|显示%s"
     //% speed.min=1 speed.max=6
-    export function Led8x8_5(Dh: Outmode , s: string): void {
+    export function Led8x8_5(Dh: OutEvent , s: string): void {
         let yas;
         let temp = 0;
         let nn:number = 0 ;
@@ -444,7 +442,7 @@ namespace Blinkit_driver {
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_String_play
     //% block="Led_8x8%PosNum显示图像, 动画%Dh"
-    export function Led8x8_6(PosNum: PosNum, Dh: Led8x8_DH): void {
+    export function Led8x8_6(PosNum: Num, Dh: Led8x8Dh): void {
         // let Wv = 48 + Dh * 10 + speed;
         // let length: number = s.length + 53; //48+5
         // const char = asciiToChar(length);
@@ -477,7 +475,7 @@ namespace Blinkit_driver {
     //% Red.min=0 Red.max=255
     //% Green.min=0 Green.max=255
     //% Blue.min=0 Blue.max=255
-    export function LedRGB(PosNum: PosNum, Red: number, Green: number, Blue: number, Dh: LedRGB_DH): void {
+    export function LedRGB(PosNum: Num, Red: number, Green: number, Blue: number, Dh: LedRGBDh): void {
         Dh = Dh + 1;    // ASCII码对应
         const Red1 = Red % 10;
         Red = Red / 10 + 48;
@@ -501,7 +499,7 @@ namespace Blinkit_driver {
     //% subcategory="Player"
     //% blockId=Player
     //% block="Player%PosNum|%Dh"
-    export function Player(PosNum: PosNum, Dh: Mp3_DH): void {
+    export function Player(PosNum: Num, Dh: Mp3Dh): void {
         let projectInfo = "7e4f" + PosNum + Dh + "#"
         serial.writeString(projectInfo);
     }
@@ -516,7 +514,7 @@ namespace Blinkit_driver {
     //% blockId=Player_2
     //% block="Player%PosNum|设置音量%Vol"
     //% Vol.min=0 Vol.max=28
-    export function Player_2(PosNum: PosNum, Vol: number): void {
+    export function Player_2(PosNum: Num, Vol: number): void {
         const asciiCode = Vol + 48; // ASCII码对应
         const char = asciiToChar(asciiCode);
         let projectInfo = "7e5f" + PosNum + ";" + char + "#"
@@ -533,7 +531,7 @@ namespace Blinkit_driver {
     //% blockId=Player_3
     //% block="Player%PosNum|播放第 %Xq|首"
     //% Xq.min=1 Xq.max=10
-    export function Player_3(PosNum: PosNum, Xq: number): void {
+    export function Player_3(PosNum: Num, Xq: number): void {
         const asciiCode = Xq + 48; // ASCII码对应
         const char = asciiToChar(asciiCode);
         let projectInfo = "7e5f" + PosNum + ":" + char + "#"
@@ -552,7 +550,7 @@ namespace Blinkit_driver {
     //% block="Servo_180%PosNum|转到%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
     //% speed.min=0 speed.max=8
-    export function Servo_360(PosNum: PosNum, Sc: number, speed: number): void {
+    export function Servo_360(PosNum: Num, Sc: number, speed: number): void {
         const Sc2 = Sc % 10;
         Sc = Sc / 10 + 48; // ASCII码对应
         const char = asciiToChar(Sc);
@@ -571,7 +569,7 @@ namespace Blinkit_driver {
     //% block="Servo_360%PosNum|pwm%Sc|速度 %speed"
     //% Sc.min=0 Sc.max=180
     //% speed.min=0 speed.max=9
-    export function Servo_180(PosNum: PosNum, Sc: number, speed: number): void {
+    export function Servo_180(PosNum: Num, Sc: number, speed: number): void {
         const Sc2 = Sc % 10;
         Sc = Sc / 10 + 48; // ASCII码对应
         const char = asciiToChar(Sc);
@@ -590,7 +588,7 @@ namespace Blinkit_driver {
     //% blockId=Motorx1
     //% block="Motor%PosNum|转动方向%dir|速度 %speed"
     //% speed.min=0 speed.max=255
-    export function Motorx1(PosNum: PosNum, dir: Motor_DH, speed: number): void {
+    export function Motorx1(PosNum: Num, dir: MotorDh, speed: number): void {
         const speed2 = speed % 10;
         speed = speed / 10 + 48;
         const char = asciiToChar(speed);
@@ -603,7 +601,7 @@ namespace Blinkit_driver {
      */
     //% weight=10
     //% blockId=kb_event block="%SensorName|%PosNum"
-    export function ping(SensorName: SensorName, PosNum: PosNum): number {
+    export function Value(SensorName: Sensor, PosNum: Num): number {
         let value_n = blinkitten_sensor[SensorName][PosNum]
         return value_n
     }
