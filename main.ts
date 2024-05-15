@@ -203,21 +203,26 @@ namespace Blinkit {
     * normal driver blocks   ok
     * @param normal which normal to turn on
     * @param dir which direction to go
-    * @param speed how fast
+    * @param Sc is the number will be show, eg: 1
     */
     //% blockId=normal
-    //% block="指定%OutmodeName|触发 %Outmode"
-    export function normal(OutmodeName: Outunit, Outmode: OutEvent): void {
+    //% block="指定%OutmodeName|触发 %Sc"
+    //% Sc.min=1 Sc.max=8
+    export function normal(OutmodeName: Outunit, Sc: number): void {
         if (OutmodeName == 0) {
-            Outmode = Outmode + 1; // ASCII码对应
-            let projectInfo = "7e30" + Outmode + "#";
+            //Outmode = Outmode + 1; // ASCII码对应
+            //let projectInfo = "7e30" + Outmode + "#";
+            let projectInfo = "7e30" + Sc + "#";
             serial.writeString(projectInfo);
         }
         else {
             const OutName = OutmodeName + 96; // ASCII码对应
-            Outmode = Outmode + 1; // ASCII码对应
+            //Outmode = Outmode + 1; // ASCII码对应
             const char = asciiToChar(OutName);
-            let projectInfo = "7e43" + char + Outmode + "#";
+            //let projectInfo = "7e43" + char + Outmode + "#";
+
+
+            let projectInfo = "7e43" + char + Sc + "#";
             serial.writeString(projectInfo);
         }
     }
