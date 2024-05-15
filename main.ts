@@ -85,7 +85,6 @@ enum Led8x8Dh3 {
     //% block="点亮"
     On,
 }
-
 enum Led8x8Dh {
     //% block="随机"
     DH1,
@@ -98,7 +97,6 @@ enum Led8x8Dh {
     //% block="直接"
     DH5,
 }
-
 enum Led8x8Dh2 {
     //% block="向左"
     Left,
@@ -107,15 +105,12 @@ enum Led8x8Dh2 {
     //% block="变化"
     Change,
 }
-
-
 enum LedRGBDh {
     //% block="无"
     Wu,
     //% block="渐变"
     Change,
 }
-
 enum Mp3Dh {
     //% block="暂停"
     Dh0,
@@ -138,7 +133,6 @@ enum Mp3Dh {
     //% block="随机播放"
     Dh9,
 }
-
 enum MotorDh {
     //% block="正转"
     Right,
@@ -267,13 +261,12 @@ namespace Blinkit {
                 let b: number = +s[1]
                 if (a >= 0 && b >= 0 && value_n >= 0) {
                     blinkitten_sensor[a][b] = value_n
-
                 }
             }
-            
             //basic.pause(10);
         }       
     }
+
 
     /**
             * Sensor driver blocks 
@@ -309,14 +302,10 @@ namespace Blinkit {
     }
 
 
-
-
     function asciiToChar(asciiCode: number): string {
         // 使用String.fromCharCode方法将ASCII码转换为字符  
         return String.fromCharCode(asciiCode);
     }
-
-
 
 
     /**
@@ -328,7 +317,7 @@ namespace Blinkit {
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_off
     //% block="Led_8x8%PosNum| 清空屏幕, 动画%Dh"
-    export function Led8x8(PosNum: Num, Dh: Led8x8Dh): void {
+    export function Led8x8(PosNum: Num , Dh: Led8x8Dh): void {
         let projectInfo = "7e5d" + PosNum + "0" + Dh + "#"
         serial.writeString(projectInfo);
     }
@@ -340,12 +329,13 @@ namespace Blinkit {
     * @param dir which direction to go
     * @param speed how fast
     * @param s is the text will be show, eg: 'Hello!'
+    * @param speed is the number will be show, eg: 1
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_String
     //% block="Led_8x8%PosNum|显示文本%s|动画%Dh|速度%speed"
     //% speed.min=1 speed.max=6
-    export function Led8x8_1(PosNum: Num, s: string, Dh: Led8x8Dh2, speed: number): void {
+    export function Led8x8_1(PosNum: Num, s: string, Dh: Led8x8Dh2, speed: number ): void {
         let Wv = 48 + Dh * 10 + speed;
         let length: number = s.length + 53; //48+5
         const char = asciiToChar(length);
@@ -360,7 +350,8 @@ namespace Blinkit {
     * @param Led8x8 which Led8x8 to turn on
     * @param dir which direction to go
     * @param speed how fast
-    * @param s is the text will be show, eg: 'Hello!'
+    * @param L_l is the number will be show, eg: 1
+    * @param L_h is the number will be show, eg: 1
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_onoff
@@ -379,7 +370,10 @@ namespace Blinkit {
     * @param Led8x8 which Led8x8 to turn on
     * @param dir which direction to go
     * @param speed how fast
-    * @param s is the text will be show, eg: 'Hello!'
+    * @param L_l is the number will be show, eg: 1
+    * @param L_h is the number will be show, eg: 1
+    * @param L_l2 is the number will be show, eg: 1
+    * @param L_h2 is the number will be show, eg: 1
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_move
@@ -443,24 +437,9 @@ namespace Blinkit {
     //% blockId=Led8x8_String_play
     //% block="Led_8x8%PosNum显示图像, 动画%Dh"
     export function Led8x8_6(PosNum: Num, Dh: Led8x8Dh): void {
-        // let Wv = 48 + Dh * 10 + speed;
-        // let length: number = s.length + 53; //48+5
-        // const char = asciiToChar(length);
-        // const char2 = asciiToChar(Wv);
-        //let projectInfo = "7e" + char + "d" + PosNum + 1 + char2 + s + "#";
-        //serial.writeString(projectInfo);
-
         let projectInfo = "7eEd" + PosNum + 2 + Dh + Led8x8_matrix[0] + Led8x8_matrix[1] + Led8x8_matrix[2] + Led8x8_matrix[3] + Led8x8_matrix[4] + Led8x8_matrix[5] + Led8x8_matrix[6] + Led8x8_matrix[7] + "#";
         serial.writeString(projectInfo);
-        //basic.showString(projectInfo)
     }
-
-
-
-
-
-
-
 
     /**
     * LedRGB driver blocks
@@ -526,6 +505,7 @@ namespace Blinkit {
 * @param Player which Led8x8 to turn on
 * @param dir which direction to go
 * @param speed how fast
+* @param Xq is the number will be show, eg: 1
 */
     //% subcategory="Player"
     //% blockId=Player_3
