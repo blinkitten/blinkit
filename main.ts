@@ -391,7 +391,7 @@ namespace Blinkit {
     */
     //% subcategory="Led_8x8"
     //% blockId=Led8x8_matrix
-    //% block="Led_8x8 行%Dh|显示%s"
+    //% block="Led_8x8 ,行%Dh|显示%s"
     //% Dh.min=1 Dh.max=8
     export function Led8x8_5(Dh: number , s: string): void {
         let yas;
