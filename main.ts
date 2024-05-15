@@ -373,7 +373,7 @@ namespace Blinkit {
     * @param Led8x8 which Led8x8 to turn on
     * @param dir which direction to go
     * @param speed how fast
-    * @param Ll is the number will be show, eg: 1
+    * @param L1 is the number will be show, eg: 1
     * @param H1 is the number will be show, eg: 1
     * @param L2 is the number will be show, eg: 1
     * @param H2 is the number will be show, eg: 1
