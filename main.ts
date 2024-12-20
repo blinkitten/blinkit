@@ -23,7 +23,7 @@ enum Sensor {
     Light,
     //% block="Click"
     Click,
-    //% block="Joystick"
+    //% block="Joystick" 
     Joystick,
     //% block="Angle"
     Angle,
