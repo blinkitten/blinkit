@@ -43,6 +43,14 @@ enum Sensor {
     SoilMoisture,
     //% block="Gesture"
     Gesture,
+    //% block="Colour"
+    Colour,
+    //% block="Loudness"
+    Loudness,
+    //% block="Weigh"
+    Weigh,
+    //% block="Pressure"
+    Pressure,
 }
 enum Outunit {
     //% block="All"
