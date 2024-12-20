@@ -444,7 +444,7 @@ namespace Blinkit {
     */
     //% subcategory="Led_RGB"
     //% blockId=Led_RGB_matrix
-    //% block="Led_RGB%PosNum|点亮%s|颜色R %Red|G %Green|B %Blue|动画%Dh"
+    //% block="Led_RGB%PosNum|点亮这些%s|颜色R %Red|G %Green|B %Blue|动画%Dh"
     //% speed.min=1 speed.max=6
     //% Red.min=0 Red.max=255
     //% Green.min=0 Green.max=255
@@ -491,8 +491,8 @@ namespace Blinkit {
     */
     //% subcategory="Led_RGB"
     //% blockId=Led_RGB
-    //% block="Led_RGB%PosNum|点亮%n|颜色R %Red|G %Green|B %Blue|动画%Dh"
-    //% n.min=1 speed.max=8
+    //% block="Led_RGB%PosNum|点亮第%n|颜色R %Red|G %Green|B %Blue|动画%Dh"
+    //% n.min=1 n.max=8
     //% speed.min=1 speed.max=6
     //% Red.min=0 Red.max=255
     //% Green.min=0 Green.max=255
