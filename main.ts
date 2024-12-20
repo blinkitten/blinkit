@@ -440,15 +440,16 @@ namespace Blinkit {
     /**
     * LedRGB driver blocks
     * @param LedRGB which Led8x8 to turn on
+    * @param s is the text will be show, eg: '10101010'
     */
     //% subcategory="Led_RGB"
     //% blockId=Led_RGB
-    //% block="Led_RGB%PosNum|颜色R %Red|G %Green|B %Blue|动画%Dh"
+    //% block="Led_RGB%PosNum|点亮%s|颜色R %Red|G %Green|B %Blue|动画%Dh"
     //% speed.min=1 speed.max=6
     //% Red.min=0 Red.max=255
     //% Green.min=0 Green.max=255
     //% Blue.min=0 Blue.max=255
-    export function LedRGB(PosNum: Num, Red: number, Green: number, Blue: number, Dh: LedRGBDh): void {
+    export function LedRGB(PosNum: Num, s: string , Red: number, Green: number, Blue: number, Dh: LedRGBDh): void {
         Dh = Dh + 1;    // ASCII码对应
         const Red1 = Red % 10;
         Red = Red / 10 + 48;
