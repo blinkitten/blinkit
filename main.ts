@@ -443,13 +443,33 @@ namespace Blinkit {
     * @param s is the text will be show, eg: '10101010'
     */
     //% subcategory="Led_RGB"
-    //% blockId=Led_RGB
+    //% blockId=Led_RGB_matrix
     //% block="Led_RGB%PosNum|点亮%s|颜色R %Red|G %Green|B %Blue|动画%Dh"
     //% speed.min=1 speed.max=6
     //% Red.min=0 Red.max=255
     //% Green.min=0 Green.max=255
     //% Blue.min=0 Blue.max=255
     export function LedRGB(PosNum: Num, s: string , Red: number, Green: number, Blue: number, Dh: LedRGBDh): void {
+        let yas;
+        let temp = 0;
+        let nn:number = 0 ;
+        for (let i = 7; i >= 0; i--)
+        {
+            yas = 1;
+            for (let j = 1; j <= 7 - i ; j++)
+            {
+                yas = yas * 2;
+            }
+            nn = +s[i]
+            if(nn!=0)
+            {
+                nn = 1
+            }
+            temp = temp + nn * yas;
+        }
+        let LedRGB_matrix: string = asciiToChar(48 + temp / 10) + temp % 10
+        
+        
         Dh = Dh + 1;    // ASCII码对应
         const Red1 = Red % 10;
         Red = Red / 10 + 48;
@@ -460,7 +480,36 @@ namespace Blinkit {
         const char = asciiToChar(Red);
         const char2 = asciiToChar(Green);
         const char3 = asciiToChar(Blue);
-        let projectInfo = "7e:e" + PosNum + Dh + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
+        let projectInfo = "7e=e" + PosNum + Dh + LedRGB_matrix + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
+        serial.writeString(projectInfo);
+    }
+
+    /**
+    * LedRGB driver blocks
+    * @param LedRGB which Led8x8 to turn on
+    * @param n is the number will be show, eg: 1
+    */
+    //% subcategory="Led_RGB"
+    //% blockId=Led_RGB
+    //% block="Led_RGB%PosNum|点亮%n|颜色R %Red|G %Green|B %Blue|动画%Dh"
+    //% n.min=1 speed.max=8
+    //% speed.min=1 speed.max=6
+    //% Red.min=0 Red.max=255
+    //% Green.min=0 Green.max=255
+    //% Blue.min=0 Blue.max=255
+    export function LedRGB_1(PosNum: Num, n: number, Red: number, Green: number, Blue: number, Dh: LedRGBDh): void {
+        Dh = Dh + 1;    // ASCII码对应
+        const Red1 = Red % 10;
+        Red = Red / 10 + 48;
+        const Green1 = Green % 10;
+        Green = Green / 10 + 48;
+        const Blue1 = Blue % 10;
+        Blue = Blue / 10 + 48;
+        const char = asciiToChar(Red);
+        const char2 = asciiToChar(Green);
+        const char3 = asciiToChar(Blue);
+        n -= 1 ;
+        let projectInfo = "7e;e" + PosNum + Dh + n + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
         serial.writeString(projectInfo);
     }
 
