@@ -442,7 +442,7 @@ namespace Blinkit {
     * @param LedRGB which LedRGB to turn on
     * @param s is the text will be show, eg: '10101010'
     */
-    //% subcategory="Led_RGB"
+    //% subcategory="Led_x8_RGB"
     //% blockId=Led_RGB_matrix
     //% block="Led_RGB%PosNum|点亮这些%s|颜色R %Red|G %Green|B %Blue"
     //% speed.min=1 speed.max=6
@@ -489,7 +489,7 @@ namespace Blinkit {
     * @param LedRGB which Led8x8 to turn on
     * @param n is the number will be show, eg: 1
     */
-    //% subcategory="Led_RGB"
+    //% subcategory="Led_x8_RGB"
     //% blockId=Led_RGB
     //% block="Led_RGB%PosNum|点亮第%n|颜色R %Red|G %Green|B %Blue"
     //% n.min=1 n.max=8
