@@ -157,13 +157,14 @@ enum MotorDh {
 namespace Blinkit {
     //let s3: string
     let blinkitten_sensor: number[][] = [];
-    for (let i = 0; i < 20; i++) {
+    let Led8x8_matrix: string[] = ["00", "00", "00", "00", "00", "00", "00", "00"];
+    for (let i = 0; i < 30; i++) {
         blinkitten_sensor[i] = [];
         for (let j = 0; j < 9; j++) {
             blinkitten_sensor[i][j] = 0;
         }
     }
-    let Led8x8_matrix: string[] = ["00", "00", "00", "00", "00", "00", "00", "00"];
+    
     /**
      * BLINKIT initialize
      */
