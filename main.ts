@@ -480,7 +480,7 @@ namespace Blinkit {
         const char = asciiToChar(Red);
         const char2 = asciiToChar(Green);
         const char3 = asciiToChar(Blue);
-        let projectInfo = "7e=e" + PosNum + '2' + LedRGB_matrix + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
+        let projectInfo = "7e<e" + PosNum + '2' + LedRGB_matrix + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
         serial.writeString(projectInfo);
     }
 
