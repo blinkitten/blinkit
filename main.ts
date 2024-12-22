@@ -177,7 +177,7 @@ namespace Blinkit {
             SerialPin.P12,
             BaudRate.BaudRate9600
         )
-        basic.pause(200);
+        //basic.pause(200);
     }
 
     /**
@@ -241,13 +241,13 @@ namespace Blinkit {
     //% blockId=Sensor_value_auto
     //% block="更新BLINKIT传感器状态"
     export function Sensor_refresh(): void {
-        
-        //let c = serial.read()
-        let s: string = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
-        let length: number = s.length;
-        if (length > 3 && s[2] == "=") {
-            let value_s: string = ""
-            for (let index = 3; index < length; index++) {  //A0=1 23
+        let c = serial.read();
+        if (c != -1) {
+            let s: string = asciiToChar(c) + serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123 let length: number = s.length;
+            let length: number = s.length;
+            if (length > 3 && s[2] == "=") {
+                let value_s: string = ""
+                for (let index = 3; index < length; index++) {  //A0=1 23
                 value_s += s[index]
             }
             let value_n: number = +value_s;
@@ -255,8 +255,9 @@ namespace Blinkit {
             let b: number = +s[1]
             if (a >= 0 && b >= 0 && value_n >= 0) {
                 blinkitten_sensor[a][b] = value_n
-            }
-        }    
+                }
+            } 
+        }   
     }
 
 
