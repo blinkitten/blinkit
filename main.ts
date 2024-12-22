@@ -255,7 +255,7 @@ namespace Blinkit {
             // basic.pause(150)
             // basic.clearScreen()
 
-            let s: string = serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123          
+            let s: string = asciiToChar(c) + serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123
                        
             let length: number = s.length;
             if (length > 3 && s[2] == "=") {
@@ -265,12 +265,11 @@ namespace Blinkit {
                 }
                 let value_n: number = +value_s;
                 let a: number = s.charCodeAt(0) - 65
-                let b: number = s.charCodeAt(1) - 48
+                let b: number = +s[1]
                 if (a >= 0 && b >= 0 && value_n >= 0) {
                     blinkitten_sensor[a][b] = value_n
                 }
             }
-            //basic.pause(10);
         }       
     }
 
