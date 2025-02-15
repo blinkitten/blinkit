@@ -214,7 +214,8 @@ namespace Blinkit {
             Value = Value % 10;
             const char = asciiToChar(Value2);
             let projectInfo = "7e41" + char + Value + "#";
-            serial.writeString(projectInfo);
+            //serial.writeString(projectInfo);
+            hub_state(projectInfo)
         }
         else {
             const OutName = OutmodeName + 96; // ASCII码对应
@@ -223,7 +224,8 @@ namespace Blinkit {
             const char = asciiToChar(OutName);
             const char2 = asciiToChar(Value2);
             let projectInfo = "7e54" + char + char2 + Value + "#";
-            serial.writeString(projectInfo);
+            //serial.writeString(projectInfo);
+            hub_state(projectInfo)
         }
     }
 
@@ -240,7 +242,8 @@ namespace Blinkit {
             //Outmode = Outmode + 1; // ASCII码对应
             //let projectInfo = "7e30" + Outmode + "#";
             let projectInfo = "7e30" + Event + "#";
-            serial.writeString(projectInfo);
+            //serial.writeString(projectInfo);
+            hub_state(projectInfo)
         }
         else {
             const OutName = OutmodeName + 96; // ASCII码对应
@@ -250,7 +253,8 @@ namespace Blinkit {
 
 
             let projectInfo = "7e43" + char + Event + "#";
-            serial.writeString(projectInfo);
+            //serial.writeString(projectInfo);
+            hub_state(projectInfo)
         }
     }
 
@@ -293,7 +297,7 @@ namespace Blinkit {
                 }
                 s += String.fromCharCode(buffer[i]); // 将字节转换为字符并拼接到字符串
             }
-            console.log(s);
+            //console.log(s);
             let length: number = s.length;
             if (length > 3 && s[2] == "=") {
                 let value_s: string = ""
@@ -352,6 +356,32 @@ namespace Blinkit {
         return String.fromCharCode(asciiCode);
     }
 
+    
+    function hub_state( out_str: string ) {  //判断是串口输出还是iic输出
+        if(hub_select == 0 )
+        {
+            serial.writeString(out_str)
+        }
+        else
+        {
+            // 创建一个字节数组
+            let buffer_s = pins.createBuffer(out_str.length);
+            // 将字符串填充到字节数组中
+            for (let i = 0; i < out_str.length; i++) {
+                buffer_s.setNumber(NumberFormat.UInt8LE, i, out_str.charCodeAt(i));
+            }
+            // 写入I2C设备
+            pins.i2cWriteBuffer(8, buffer_s);
+            
+            // 验证iic发送内容是否正确
+            let strr =""
+            for (let i = 0; i < out_str.length; i++) {
+                strr += String.fromCharCode(buffer_s[i]); // 将字节转换为字符并拼接到字符串
+            }
+            console.log(strr);
+        }
+    }
+
 
     /**
     * Led8x8 driver blocks   ok
@@ -362,7 +392,8 @@ namespace Blinkit {
     //% block="Led_8x8%PosNum| 清空屏幕, 动画%Dh"
     export function Led8x8(PosNum: Num , Dh: Led8x8Dh): void {
         let projectInfo = "7e5d" + PosNum + "0" + Dh + "#"
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -382,7 +413,8 @@ namespace Blinkit {
         const char = asciiToChar(length);
         const char2 = asciiToChar(Wv);
         let projectInfo = "7e" + char + "d" + PosNum + 1 + char2 + s + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -401,7 +433,8 @@ namespace Blinkit {
         let L_n = L + H * 8 - 9 + 48;
         const char = asciiToChar(L_n);
         let projectInfo = "7e6d" + PosNum + "3" + Dh + char + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -425,7 +458,8 @@ namespace Blinkit {
         const char = asciiToChar(L_n);
         const char2 = asciiToChar(L_n2);
         let projectInfo = "7e6d" + PosNum + "4" + char + char2 + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -472,7 +506,8 @@ namespace Blinkit {
     //% block="Led_8x8%PosNum显示图像, 动画%Dh"
     export function Led8x8_6(PosNum: Num, Dh: Led8x8Dh): void {
         let projectInfo = "7eEd" + PosNum + 2 + Dh + Led8x8_matrix[0] + Led8x8_matrix[1] + Led8x8_matrix[2] + Led8x8_matrix[3] + Led8x8_matrix[4] + Led8x8_matrix[5] + Led8x8_matrix[6] + Led8x8_matrix[7] + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -519,7 +554,8 @@ namespace Blinkit {
         const char2 = asciiToChar(Green);
         const char3 = asciiToChar(Blue);
         let projectInfo = "7e<e" + PosNum + '2' + LedRGB_matrix + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -548,7 +584,8 @@ namespace Blinkit {
         const char3 = asciiToChar(Blue);
         n -= 1 ;
         let projectInfo = "7e;e" + PosNum + '1' + n + char + Red1 + char2 + Green1 + char3 + Blue1 + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -560,7 +597,8 @@ namespace Blinkit {
     //% block="Player%PosNum|%Dh"
     export function Player(PosNum: Num, Dh: Mp3Dh): void {
         let projectInfo = "7e4f" + PosNum + Dh + "#"
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -575,7 +613,8 @@ namespace Blinkit {
         const asciiCode = Vol + 48; // ASCII码对应
         const char = asciiToChar(asciiCode);
         let projectInfo = "7e5f" + PosNum + ";" + char + "#"
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -591,7 +630,8 @@ namespace Blinkit {
         const asciiCode = Xq + 48; // ASCII码对应
         const char = asciiToChar(asciiCode);
         let projectInfo = "7e5f" + PosNum + ":" + char + "#"
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -610,7 +650,8 @@ namespace Blinkit {
         Sc = Sc / 10 + 48; // ASCII码对应
         const char = asciiToChar(Sc);
         let projectInfo = "7e6a" + PosNum + speed + char + Sc2 + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -628,7 +669,8 @@ namespace Blinkit {
         Sc = Sc / 10 + 48; // ASCII码对应
         const char = asciiToChar(Sc);
         let projectInfo = "7e6a" + PosNum + speed + char + Sc2 + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
@@ -646,7 +688,8 @@ namespace Blinkit {
         speed = speed / 10 + 48;
         const char = asciiToChar(speed);
         let projectInfo = "7e6b" + PosNum + dir + char + speed2 + "#";
-        serial.writeString(projectInfo);
+        //serial.writeString(projectInfo);
+        hub_state(projectInfo)
     }
 
     /**
