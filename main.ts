@@ -373,12 +373,12 @@ namespace Blinkit {
             // 写入I2C设备
             pins.i2cWriteBuffer(8, buffer_s);
             
-            // 验证iic发送内容是否正确
-            let strr =""
-            for (let i = 0; i < out_str.length; i++) {
-                strr += String.fromCharCode(buffer_s[i]); // 将字节转换为字符并拼接到字符串
-            }
-            console.log(strr);
+            // // 验证iic发送内容是否正确
+            // let strr =""
+            // for (let i = 0; i < out_str.length; i++) {
+            //     strr += String.fromCharCode(buffer_s[i]); // 将字节转换为字符并拼接到字符串
+            // }
+            // console.log(strr);
         }
     }
 
