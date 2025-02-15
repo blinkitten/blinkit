@@ -156,6 +156,7 @@ enum MotorDh {
 //% weight=100 color=#0855AA icon="\uf0ca" block="BLINKIT"
 namespace Blinkit {
     //let s3: string
+    let hub_select: number ;
     let blinkitten_sensor: number[][] = [];
     let Led8x8_matrix: string[] = ["00", "00", "00", "00", "00", "00", "00", "00"];
     for (let i = 0; i < 30; i++) {
@@ -164,14 +165,30 @@ namespace Blinkit {
             blinkitten_sensor[i][j] = 0;
         }
     }
+    /**
+         * BLINKIT initialize
+         */
+    //% blockId="BLINKIT_IIC_init" block="初始化BLINKIT为HUD模式"
+    //% weight=100 blockGap=8
+    //% parts=BLINKIT_Serial trackArgs=0
+    export function init2() {
+        hub_select = 1 ;
+        //let deviceAddr = 8;
+        //let terminator = 10;
+        //let maxLength = 8;
+        SerialPin.USB_TX,
+            SerialPin.USB_RX,
+            serial.setBaudRate(BaudRate.BaudRate9600);
+    }
     
     /**
      * BLINKIT initialize
      */
-    //% blockId="BLINKIT_Serial_init" block="初始化BLINKIT"
+    //% blockId="BLINKIT_Serial_init" block="初始化BLINKIT为简单模式"
     //% weight=100 blockGap=8
     //% parts=BLINKIT_Serial trackArgs=0
     export function init() {
+        hub_select = 0;
         serial.redirect(
             SerialPin.P8,
             SerialPin.P12,
@@ -179,6 +196,10 @@ namespace Blinkit {
         )
         //basic.pause(200);
     }
+
+
+    
+
 
     /**
     * normal2 driver blocks  ok
@@ -241,23 +262,56 @@ namespace Blinkit {
     //% blockId=Sensor_value_auto
     //% block="更新BLINKIT传感器状态"
     export function Sensor_refresh(): void {
-        let c = serial.read();
-        if (c != -1) {
-            let s: string = asciiToChar(c) + serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123 let length: number = s.length;
+        if (hub_select == 0)
+        {
+            let c = serial.read();
+            if (c != -1) {
+                let s: string = asciiToChar(c) + serial.readUntil(serial.delimiters(Delimiters.NewLine))//从串口读取 直到回车 A0=123 let length: number = s.length;
+                let length: number = s.length;
+                if (length > 3 && s[2] == "=") {
+                    let value_s: string = ""
+                    for (let index = 3; index < length; index++) {  //A0=1 23
+                    value_s += s[index]
+                }
+                let value_n: number = +value_s;
+                let a: number = s.charCodeAt(0) - 65
+                let b: number = +s[1]
+                if (a >= 0 && b >= 0 && value_n >= 0) {
+                    blinkitten_sensor[a][b] = value_n
+                    }
+                } 
+            }   
+        }
+        else if(pins.digitalReadPin(DigitalPin.P5) == 1) 
+        { 
+            //从I2C设备读取字符串的函数
+            let buffer = pins.i2cReadBuffer(8, 8); // 一次性读取最大长度的字节
+            let s: string = "";
+            for (let i = 0; i < 8; i++) {
+                if (buffer[i] === 10) {
+                    break; // 遇到终止符，停止读取
+                }
+                s += String.fromCharCode(buffer[i]); // 将字节转换为字符并拼接到字符串
+            }
+            console.log(s);
             let length: number = s.length;
             if (length > 3 && s[2] == "=") {
                 let value_s: string = ""
                 for (let index = 3; index < length; index++) {  //A0=1 23
-                value_s += s[index]
-            }
-            let value_n: number = +value_s;
-            let a: number = s.charCodeAt(0) - 65
-            let b: number = +s[1]
-            if (a >= 0 && b >= 0 && value_n >= 0) {
-                blinkitten_sensor[a][b] = value_n
+                    value_s += s[index]
+                }
+                let value_n: number = +value_s;
+                let a: number = s.charCodeAt(0) - 65
+                let b: number = +s[1]
+                if (a >= 0 && b >= 0 && value_n >= 0) {
+                    blinkitten_sensor[a][b] = value_n
                 }
             } 
-        }   
+        }
+
+
+        
+           
     }
 
 
