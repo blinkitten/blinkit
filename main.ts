@@ -155,7 +155,7 @@ namespace Blinkit {
     let hub_select: number ;
     let blinkitten_sensor: number[][] = [];
     let Led8x8_matrix: string[] = ["00", "00", "00", "00", "00", "00", "00", "00"];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
         blinkitten_sensor[i] = [];
         for (let j = 0; j < 9; j++) {
             blinkitten_sensor[i][j] = 0;
@@ -173,8 +173,8 @@ namespace Blinkit {
         //let terminator = 10;
         //let maxLength = 8;
         SerialPin.USB_TX,
-            SerialPin.USB_RX,
-            serial.setBaudRate(BaudRate.BaudRate9600);
+        SerialPin.USB_RX,
+        serial.setBaudRate(BaudRate.BaudRate9600);
     }
     
     /**
