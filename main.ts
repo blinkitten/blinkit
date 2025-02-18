@@ -21,36 +21,32 @@ enum Num {
 enum Sensor {
     //% block="Light"
     Light,
-    //% block="Click"
-    Click,
-    //% block="Joystick" 
-    Joystick,
-    //% block="Angle"
-    Angle,
-    //% block="Push"
-    Push,
+    //% block="Click/Touch"
+    Click_Touch,
+    //% block="Pressure" 
+    Pressure,
+    //% block="Magbetic"
+    Magbetic,
+    //% block="Push/Angle"
+    Push_Angle,
     //% block="ASR"
     ASR,
-    //% block="Title"
-    Title,
-    //% block="Touch"
-    Touch,
-    //% block="TEMP&HUM"
-    TEMPHUM,
+    //% block="Title/Joystick"
+    Title_Joystick,
+    //% block="Temperature"
+    Temperature,
+    //% block="Humidity"
+    Humidity,
     //% block="Distance"
     Distance,
-    //% block="Soil Moisture"
-    SoilMoisture,
-    //% block="Gesture"
-    Gesture,
     //% block="Colour"
     Colour,
+    //% block="Gesture"
+    Gesture,
+    //% block="Heartbeat"
+    Heartbeat,
     //% block="Loudness"
     Loudness,
-    //% block="Weigh"
-    Weigh,
-    //% block="Pressure"
-    Pressure,
 }
 enum Outunit {
     //% block="All"
