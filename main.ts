@@ -25,7 +25,7 @@ enum Sensor {
     Click_Touch,
     //% block="Pressure" 
     Pressure,
-    //% block="Magbetic"
+    //% block="Magnetic"
     Magbetic,
     //% block="Push/Angle"
     Push_Angle,
